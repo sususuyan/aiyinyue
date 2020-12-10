@@ -1,0 +1,170 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:2:1-28:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\6f3be278149eba26926bf62ad5754a1b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\db7d69863af180fbce42419b021a1082\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\baebb5ccee68023a8fde30fbb9d6d35e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\23e450d826475c105b0d716543a6a322\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\28cb310d4b9c9875f1998c4664a8dfe0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\254f4145860515544834f38276a6cfd6\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\ec081f43b1293b4c9544ef0a89dbcdae\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\51f5d50eaa3af13cc7e4775761cab4ab\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\0fa020d1cfb0caf9178a56aa688f0ce1\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\7206835c1bd27e51360a240e50db9535\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\03cf276f37c1a4f89709213568054a9e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\1569a715f0aa2118255bf3faa3b0dac0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\829509990282d896c822ed7a8f80ff9e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\e3c4a239b98968ee931ac4d17281e1e9\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\3193e64576597c6a35578b3b1443e0ba\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\05da16012689797b62efbd19689148b0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\fb477d3de399f9ecf8a1811180b6d660\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\d43edfbfe213054b10ed8f8c09e548f9\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\7695e09948779af03d4f7199794a6ee2\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\41be0938cd6e47eabcbb947ae35a3e61\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\2d38ce4abe2ab3cb685a588e14e9fc7f\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\07485c12f55cd6fe89f98a08a1be17a9\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\14725f032602b0e3bf258d3a89692bb4\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\2cc5272df92b4f7e47f83c455af4d135\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\8a9c79f6ca3bb1f3b59f95d5827238d1\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\018ae02953252f787e3a52db0aeedc9b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\b332410d78e939a169bd406de974d81d\AndroidManifest.xml:17:1-22:12
+INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:2:1-28:12
+	package
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:3:5-44
+		INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:2:1-28:12
+		INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:2:1-28:12
+		INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.CAMERA
+ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:5:5-65
+	android:name
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:5:22-62
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:6:5-81
+	android:name
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:6:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:7:5-80
+	android:name
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:7:22-77
+application
+ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:9:5-26:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\db7d69863af180fbce42419b021a1082\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\db7d69863af180fbce42419b021a1082\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\05da16012689797b62efbd19689148b0\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\05da16012689797b62efbd19689148b0\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\fb477d3de399f9ecf8a1811180b6d660\AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\fb477d3de399f9ecf8a1811180b6d660\AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\05da16012689797b62efbd19689148b0\AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:14:9-35
+	android:label
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:12:9-41
+	android:roundIcon
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:13:9-46
+	android:icon
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:11:9-41
+	android:allowBackup
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:10:9-35
+	android:theme
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:15:9-40
+activity#com.zeusee.main.hyperlandmark.MainActivity
+ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:16:9-25:20
+	android:screenOrientation
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:18:13-49
+	android:theme
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:19:13-55
+	android:name
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:17:13-70
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:20:13-24:29
+action#android.intent.action.MAIN
+ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:21:17-69
+	android:name
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:21:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:23:17-77
+	android:name
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml:23:27-74
+uses-sdk
+INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\6f3be278149eba26926bf62ad5754a1b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\6f3be278149eba26926bf62ad5754a1b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\db7d69863af180fbce42419b021a1082\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\db7d69863af180fbce42419b021a1082\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\baebb5ccee68023a8fde30fbb9d6d35e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\baebb5ccee68023a8fde30fbb9d6d35e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\23e450d826475c105b0d716543a6a322\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\23e450d826475c105b0d716543a6a322\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\28cb310d4b9c9875f1998c4664a8dfe0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\28cb310d4b9c9875f1998c4664a8dfe0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\254f4145860515544834f38276a6cfd6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\254f4145860515544834f38276a6cfd6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\ec081f43b1293b4c9544ef0a89dbcdae\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\ec081f43b1293b4c9544ef0a89dbcdae\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\51f5d50eaa3af13cc7e4775761cab4ab\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\51f5d50eaa3af13cc7e4775761cab4ab\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\0fa020d1cfb0caf9178a56aa688f0ce1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\0fa020d1cfb0caf9178a56aa688f0ce1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\7206835c1bd27e51360a240e50db9535\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\7206835c1bd27e51360a240e50db9535\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\03cf276f37c1a4f89709213568054a9e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\03cf276f37c1a4f89709213568054a9e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\1569a715f0aa2118255bf3faa3b0dac0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\1569a715f0aa2118255bf3faa3b0dac0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\829509990282d896c822ed7a8f80ff9e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\829509990282d896c822ed7a8f80ff9e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\e3c4a239b98968ee931ac4d17281e1e9\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\e3c4a239b98968ee931ac4d17281e1e9\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\3193e64576597c6a35578b3b1443e0ba\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\3193e64576597c6a35578b3b1443e0ba\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\05da16012689797b62efbd19689148b0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\05da16012689797b62efbd19689148b0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\fb477d3de399f9ecf8a1811180b6d660\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\fb477d3de399f9ecf8a1811180b6d660\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\d43edfbfe213054b10ed8f8c09e548f9\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\d43edfbfe213054b10ed8f8c09e548f9\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\7695e09948779af03d4f7199794a6ee2\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\7695e09948779af03d4f7199794a6ee2\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\41be0938cd6e47eabcbb947ae35a3e61\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\41be0938cd6e47eabcbb947ae35a3e61\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\2d38ce4abe2ab3cb685a588e14e9fc7f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\2d38ce4abe2ab3cb685a588e14e9fc7f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\07485c12f55cd6fe89f98a08a1be17a9\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\07485c12f55cd6fe89f98a08a1be17a9\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\14725f032602b0e3bf258d3a89692bb4\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\14725f032602b0e3bf258d3a89692bb4\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\2cc5272df92b4f7e47f83c455af4d135\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\2cc5272df92b4f7e47f83c455af4d135\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\8a9c79f6ca3bb1f3b59f95d5827238d1\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\8a9c79f6ca3bb1f3b59f95d5827238d1\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\018ae02953252f787e3a52db0aeedc9b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\018ae02953252f787e3a52db0aeedc9b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\b332410d78e939a169bd406de974d81d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\11469\.gradle\wrapper\dists\gradle-2.14.1-all\caches\transforms-2\files-2.1\b332410d78e939a169bd406de974d81d\AndroidManifest.xml:20:5-44
+INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+		ADDED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Android-workplace\Beauty\app\src\main\AndroidManifest.xml
