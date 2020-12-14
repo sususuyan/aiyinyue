@@ -1,2 +1,0 @@
-[1/2] Building CXX object CMakeFiles/face.dir/src/main/cpp/face.cpp.o
-[2/2] Linking CXX shared library ..\..\..\..\build\intermediates\cmake\debug\obj\armeabi-v7a\libface.so

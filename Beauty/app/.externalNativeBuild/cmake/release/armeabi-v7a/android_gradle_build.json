@@ -1,9 +1,9 @@
 
 {
-	"buildFiles" : [ "D:/Android-workplace/Beauty/app/CMakeLists.txt" ],
+	"buildFiles" : [ "D:/Android-workplace/aiyinyue/Beauty/app/CMakeLists.txt" ],
 	"cleanCommands" : 
 	[
-		"D:\\ProgramFiles\\Android\\AndroidStudio\\SDK\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\Android-workplace\\Beauty\\app\\.externalNativeBuild\\cmake\\release\\armeabi-v7a --target clean"
+		"D:\\ProgramFiles\\Android\\AndroidStudio\\SDK\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\Android-workplace\\aiyinyue\\Beauty\\app\\.externalNativeBuild\\cmake\\release\\armeabi-v7a --target clean"
 	],
 	"cppFileExtensions" : [ "cpp" ],
 	"libraries" : 
@@ -12,18 +12,18 @@
 		{
 			"abi" : "armeabi-v7a",
 			"artifactName" : "face",
-			"buildCommand" : "D:\\ProgramFiles\\Android\\AndroidStudio\\SDK\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\Android-workplace\\Beauty\\app\\.externalNativeBuild\\cmake\\release\\armeabi-v7a --target face",
+			"buildCommand" : "D:\\ProgramFiles\\Android\\AndroidStudio\\SDK\\cmake\\3.6.4111459\\bin\\cmake.exe --build D:\\Android-workplace\\aiyinyue\\Beauty\\app\\.externalNativeBuild\\cmake\\release\\armeabi-v7a --target face",
 			"buildType" : "release",
 			"files" : 
 			[
 				
 				{
 					"flags" : "  --target=armv7-none-linux-androideabi19 --gcc-toolchain=D:/ProgramFiles/Android/AndroidStudio/SDK/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/ProgramFiles/Android/AndroidStudio/SDK/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dface_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -std=c++11 -frtti -fexceptions -Oz -DNDEBUG  -fPIC    -c ",
-					"src" : "D:/Android-workplace/Beauty/app/src/main/cpp/face.cpp",
-					"workingDirectory" : "D:/Android-workplace/Beauty/app/.externalNativeBuild/cmake/release/armeabi-v7a"
+					"src" : "D:/Android-workplace/aiyinyue/Beauty/app/src/main/cpp/face.cpp",
+					"workingDirectory" : "D:/Android-workplace/aiyinyue/Beauty/app/.externalNativeBuild/cmake/release/armeabi-v7a"
 				}
 			],
-			"output" : "D:/Android-workplace/Beauty/app/build/intermediates/cmake/release/obj/armeabi-v7a/libface.so",
+			"output" : "D:/Android-workplace/aiyinyue/Beauty/app/build/intermediates/cmake/release/obj/armeabi-v7a/libface.so",
 			"toolchain" : "1307494425"
 		}
 	},
