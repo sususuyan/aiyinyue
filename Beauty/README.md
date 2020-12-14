@@ -12,5 +12,5 @@
 # 关于人脸SDK
 采用HyperLandmark人脸标定算法，更多相关内容可以去开源项目中了解：(https://github.com/zeusees/HyperLandmark)。
 
-#部署
+# 部署
 * Android 4.3或更高版本（OpenGL ES 2.0或更高版本）
