@@ -21,6 +21,8 @@ by 赵鹏程
 
 人像：
 
+![Aaron Swartz](https://raw.githubusercontent.com/sususuyan/aiyinyue/main/Segmentation/tf_serving_backend_codes/test_images/girl4.jpg)
+
 背景图：
 
 替换结果：
