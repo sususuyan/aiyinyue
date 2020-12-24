@@ -19,10 +19,14 @@ by 赵鹏程
 
 ## 效果展示
 
-人像：
+原人像：
 
 ![Aaron Swartz](https://raw.githubusercontent.com/sususuyan/aiyinyue/main/Segmentation/tf_serving_backend_codes/test_images/girl4.jpg)
 
 背景图：
 
+![Aaron Swartz](https://raw.githubusercontent.com/sususuyan/aiyinyue/main/Segmentation/tf_serving_backend_codes/test_images/b2.jpg)
+
 替换结果：
+
+![Aaron Swartz](https://raw.githubusercontent.com/sususuyan/aiyinyue/main/Segmentation/tf_serving_backend_codes/test_images/girl4_result.png)
