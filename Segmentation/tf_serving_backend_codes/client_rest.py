@@ -9,7 +9,7 @@ import numpy as np
 import cv2
 
 # 图片的本地保存路径，人像和背景     
-path = "./test_images/girl5.jpg"
+path = "./test_images/girl4.jpg"
 pathBack = "./test_images/b2.jpg"
 
 # 目标主机url与接口
