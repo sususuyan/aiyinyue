@@ -15,8 +15,8 @@ by 赵鹏程
 
 ## 环境与部署方式
 
-opencv-python 4.4.0.46
-numpy 1.19.4
+opencv-python 4.4.0.46  
+numpy 1.19.4  
 使用docker+tensorflow serving的方式部属于服务器端
 
 ## 效果展示
