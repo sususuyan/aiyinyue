@@ -17,7 +17,11 @@ by 赵鹏程
 
 opencv-python 4.4.0.46  
 numpy 1.19.4  
-使用docker+tensorflow serving的方式部属于服务器端
+使用docker+tensorflow serving的方式部属于服务器端  
+
+## 使用  
+
+``python client_rest.py``
 
 ## 效果展示
 
