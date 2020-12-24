@@ -12,7 +12,8 @@ by 赵鹏程
 
 ##  模型简介
 
-基于Unet与MobileNeV2搭建的深度网络
+基于Unet与MobileNeV2搭建的深度网络,模型在测试集上达到了96.1%的MIoU。  
+Dataset链接：[Dataset](http://xiaoyongshen.me/webpage_portrait/index.html)
 
 ## 环境与部署方式
 
@@ -40,4 +41,5 @@ numpy 1.19.4
 
 ![Aaron Swartz](https://raw.githubusercontent.com/sususuyan/aiyinyue/main/Segmentation/tf_serving_backend_codes/test_images/girl4_result.png)
 
+由于数据集的缘故，对半身的效果最佳，模型训练同时也学习了一些模糊的特征，也能分割动物的图像。
 
