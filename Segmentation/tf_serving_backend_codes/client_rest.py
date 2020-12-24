@@ -13,7 +13,8 @@ path = "./test_images/girl4.jpg"
 pathBack = "./test_images/b2.jpg"
 
 # 目标主机url与接口
-URL = "http://localhost:8501/v1/models/export:predict"
+# URL = "http://localhost:8501/v1/models/export:predict"
+URL = "http://121.5.57.19:8501/v1/models/export:predict"
 headers = {"content-type": "application/json"}
 
 # 设定核卷积大小
