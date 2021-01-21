@@ -1,9 +1,0 @@
-docker run -p 8501:8501 \
-  --mount type=bind,\
-source=/home/zpc/Documents/seg_human/export,\
-target=/models/export/ \
-  -e MODEL_NAME=export -t tensorflow/serving &
-  
-# 在以下端口形式监听：
-curl -d '{"instances": [1.0, 2.0, 5.0]}' \
-  -X POST http://localhost:8501/v1/models/half_plus_two:predict
