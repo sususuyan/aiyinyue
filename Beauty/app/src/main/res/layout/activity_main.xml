@@ -1,32 +1,62 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <com.zeusee.main.hyperlandmark.FixedAspectRatioRelativeLayout
+    <com.zeusee.main.hyperlandmark.widget.FixedAspectRatioRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <SurfaceView
             android:id="@+id/surface_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </com.zeusee.main.hyperlandmark.FixedAspectRatioRelativeLayout>
 
-    <LinearLayout
+    </com.zeusee.main.hyperlandmark.widget.FixedAspectRatioRelativeLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00877676"
+                    android:drawableEnd="@android:drawable/ic_popup_sync"
+                    android:onClick="doReset"
+                    android:text="重置"
+                    android:textColor="#716E68" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:text="关键点"
+                    android:textColor="#716E68"
+                    android:textSize="14sp" />
+            </TableRow>
 
             <TextView
                 android:id="@+id/text_view_a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="大眼：0"
+                android:text="大眼：30"
                 android:textSize="10sp" />
 
             <SeekBar
@@ -35,13 +65,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:max="100"
-                android:progress="0" />
+                android:progress="30" />
 
             <TextView
                 android:id="@+id/text_view_b"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="瘦脸：0"
+                android:text="瘦脸：30"
                 android:textSize="10sp" />
 
             <SeekBar
@@ -50,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:max="100"
-                android:progress="0" />
+                android:progress="30" />
 
             <TextView
                 android:id="@+id/text_view_c"
@@ -67,19 +97,11 @@
                 android:max="100"
                 android:progress="50" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
             <TextView
                 android:id="@+id/text_view_d"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="削脸：0"
+                android:text="削脸：30"
                 android:textSize="10sp" />
 
             <SeekBar
@@ -88,13 +110,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:max="100"
-                android:progress="0" />
+                android:progress="30" />
 
             <TextView
                 android:id="@+id/text_view_e"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="瘦鼻：0"
+                android:text="瘦鼻：30"
                 android:textSize="10sp" />
 
             <SeekBar
@@ -103,17 +125,63 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:max="100"
-                android:progress="0" />
+                android:progress="30" />
 
-            <Switch
-                android:id="@+id/switch1"
+            <TextView
+                android:id="@+id/text_view_f"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="嘴型：0"
+                android:textSize="10sp" />
+
+            <SeekBar
+                android:id="@+id/seek_bar_f"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="显示关键点：" />
+                android:max="100"
+                android:progress="50" />
+
+            <TextView
+                android:id="@+id/text_view_g"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="额头：0"
+                android:textSize="10sp" />
+
+            <SeekBar
+                android:id="@+id/seek_bar_g"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:max="100"
+                android:progress="50" />
+
+            <TextView
+                android:id="@+id/text_view_h"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="人中：0"
+                android:textSize="10sp" />
+
+            <SeekBar
+                android:id="@+id/seek_bar_h"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:max="100"
+                android:progress="50" />
+
 
         </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
+    <android.support.design.widget.NavigationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

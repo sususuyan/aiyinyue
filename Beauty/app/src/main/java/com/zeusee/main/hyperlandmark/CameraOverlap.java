@@ -8,13 +8,14 @@ import android.util.Log;
 
 import java.util.List;
 
+//相机调用类
 public class CameraOverlap {
 
     protected Camera mCamera = null;
     protected Camera.CameraInfo mCameraInfo = null;
     public static final int PREVIEW_WIDTH = 640;
     public static final int PREVIEW_HEIGHT = 480;
-    public static final int SCALLE_FACTOR = 2;
+    public static final int SCALLE_FACTOR = 2;//(1,2,4)
 
     private int CameraFacing = Camera.CameraInfo.CAMERA_FACING_FRONT;
     private Camera.PreviewCallback mPreviewCallback;
@@ -36,7 +37,6 @@ public class CameraOverlap {
         Camera.CameraInfo info = new Camera.CameraInfo();
         for (int i = 0; i < Camera.getNumberOfCameras(); i++) {
             Camera.getCameraInfo(i, info);
-            Log.d("Taginfo", info.toString());
             if (info.facing == CameraFacing) {
                 try {
                     mCamera = Camera.open(i);
@@ -50,6 +50,7 @@ public class CameraOverlap {
             }
         }
         try {
+            //将SurfaceTexture设置成camera预览的纹理
             mCamera.setPreviewTexture(surfaceTexture);
             initCamera();
         } catch (Exception ex) {

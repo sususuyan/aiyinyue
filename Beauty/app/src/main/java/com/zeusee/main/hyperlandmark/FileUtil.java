@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-public class FileUtil {
+public class FileUtil {//文件处理帮助类
 
     public static String modelPath = Environment.getExternalStorageDirectory()
             + File.separator + "ZeuseesFaceTracking";

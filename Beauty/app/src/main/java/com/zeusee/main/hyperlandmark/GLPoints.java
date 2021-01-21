@@ -8,7 +8,7 @@ import java.nio.FloatBuffer;
 
 public class GLPoints {
     private FloatBuffer vertexBuffer;//顶点坐标数据缓冲
-    private int bufferLength = 106*2*4;
+    private int bufferLength = 109*2*4;
     private int programId = -1;//自定义渲染管线程序id
     private int aPositionHandle;//顶点位置属性引用id
     private int[] vertexBuffers;
@@ -68,7 +68,7 @@ public class GLPoints {
        // 解绑VBO
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
         //绘制
-        GLES20.glDrawArrays(GLES20.GL_POINTS, 0, 106);
+        GLES20.glDrawArrays(GLES20.GL_POINTS, 0, 109);
     }
 
     public void release(){

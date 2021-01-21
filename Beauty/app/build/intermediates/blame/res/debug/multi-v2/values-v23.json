@@ -1,8 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Android-workplace\\Beauty\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
+            "outputFile": "D:\\Android-workplace\\aiyinyue\\Beauty\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
             "map": [
+                {
+                    "source": "C:\\Users\\11469\\.gradle\\wrapper\\dists\\gradle-2.14.1-all\\caches\\transforms-2\\files-2.1\\04075ff6350eae0ece333f813aa9225e\\res\\values-v23\\values-v23.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "4",
+                        "endColumns": "12",
+                        "endOffsets": "200"
+                    },
+                    "to": {
+                        "startLines": "37",
+                        "startColumns": "4",
+                        "startOffsets": "2646",
+                        "endLines": "39",
+                        "endColumns": "12",
+                        "endOffsets": "2791"
+                    }
+                },
                 {
                     "source": "C:\\Users\\11469\\.gradle\\wrapper\\dists\\gradle-2.14.1-all\\caches\\transforms-2\\files-2.1\\6f3be278149eba26926bf62ad5754a1b\\res\\values-v23\\values-v23.xml",
                     "from": {

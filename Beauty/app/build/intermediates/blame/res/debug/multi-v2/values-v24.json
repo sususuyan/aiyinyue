@@ -1,8 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Android-workplace\\Beauty\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "outputFile": "D:\\Android-workplace\\aiyinyue\\Beauty\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
+                {
+                    "source": "C:\\Users\\11469\\.gradle\\wrapper\\dists\\gradle-2.14.1-all\\caches\\transforms-2\\files-2.1\\7902a95ef86f83b49b5bee8978fb2df6\\res\\values-v24\\values-v24.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,121,182,248",
+                        "endColumns": "65,60,65,66",
+                        "endOffsets": "116,177,243,310"
+                    },
+                    "to": {
+                        "startLines": "4,5,6,7",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "347,413,474,540",
+                        "endColumns": "65,60,65,66",
+                        "endOffsets": "408,469,535,602"
+                    }
+                },
                 {
                     "source": "C:\\Users\\11469\\.gradle\\wrapper\\dists\\gradle-2.14.1-all\\caches\\transforms-2\\files-2.1\\6f3be278149eba26926bf62ad5754a1b\\res\\values-v24\\values-v24.xml",
                     "from": {

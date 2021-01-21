@@ -3,27 +3,17 @@ package com.zeusee.main.hyperlandmark;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.HandlerThread;
+import android.os.*;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.widget.SeekBar;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.view.*;
+import android.widget.*;
 
 import com.zeusee.main.hyperlandmark.jni.Face;
 import com.zeusee.main.hyperlandmark.jni.FaceTracking;
-
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,7 +21,7 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-    void InitModelFiles() {
+    void InitModelFiles() {//将模型文件存储到本地sdcard中
 
         String assetPath = "ZeuseesFaceTracking";
         String sdcardPath = Environment.getExternalStorageDirectory()
@@ -55,27 +45,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Log.d("Tag1", "1");
+            //Log.d("Tag1", "1");
             ArrayList<String> list = new ArrayList<>();
             for (int i = 0; i < permissions.length; i++) {
                 if (PermissionChecker.checkSelfPermission(this, permissions[i]) == PackageManager.PERMISSION_DENIED) {
-                    Log.d("Tag6", "6");
+                    //Log.d("Tag6", "6");
                     list.add(permissions[i]);
                 }
             }
             if (list.size() != 0) {
-                Log.d("Tag3", "3");
+                //Log.d("Tag3", "3");
                 denied = new String[list.size()];
                 for (int i = 0; i < list.size(); i++) {
                     denied[i] = list.get(i);
                 }
                 ActivityCompat.requestPermissions(this, denied, 5);
             } else {
-                Log.d("Tag4", "4");
+                //Log.d("Tag4", "4");
                 init();
             }
         } else {
-            Log.d("Tag2", "2");
+            //Log.d("Tag2", "2");
             init();
         }
 
@@ -100,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             if (isDenied) {
                 Toast.makeText(this, "请开启权限", Toast.LENGTH_SHORT).show();
             } else {
-                Log.d("Tag5", "5");
+                //Log.d("Tag5", "5");
                 init();
 
             }
@@ -117,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SurfaceView mSurfaceView;
 
+
     private EGLUtils mEglUtils;
     private GLFramebuffer mFramebuffer;
     private GLFrame mFrame;
@@ -129,6 +120,11 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar seekBarC;//缩下巴
     private SeekBar seekBarD;//削脸
     private SeekBar seekBarE;//瘦鼻
+    private SeekBar seekBarF;//嘴型
+    private SeekBar seekBarG;//额头
+    private SeekBar seekBarH;//人中
+
+
     private Switch aSwitch;//关键点显示控制
 
     private TextView textViewA;//大眼
@@ -136,13 +132,21 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewC;//缩下巴
     private TextView textViewD;//削脸
     private TextView textViewE;//瘦鼻
+    private TextView textViewF;//嘴型
+    private TextView textViewG;//额头
+    private TextView textViewH;//人中
+
+    ArrayList ms=new ArrayList();
+    long sum=0;
 
     private void init() {
         InitModelFiles();
-        Log.d("myTag", FileUtil.modelPath);
-        FaceTracking.getInstance().FaceTrackingInit(FileUtil.modelPath + "/models", height, width);
+        //Log.d("myTag", FileUtil.modelPath);
+
 
         cameraOverlap = new CameraOverlap(this);
+
+        FaceTracking.getInstance().FaceTrackingInit(FileUtil.modelPath + "/models", height, width);
         mNv21Data = new byte[CameraOverlap.PREVIEW_WIDTH * CameraOverlap.PREVIEW_HEIGHT * 2];
         mFramebuffer = new GLFramebuffer();
         mFrame = new GLFrame(this);
@@ -164,7 +168,8 @@ public class MainActivity extends AppCompatActivity {
                         if (mEglUtils == null) {
                             return;
                         }
-                        mFrame.setI(seekBarA.getProgress()/seekBarA.getMax());
+                        //mFrame.setI(seekBarA.getProgress()/seekBarA.getMax());
+                        //把seekbar的值传入美型参数
                         setBeautyParam();
                         mFrame.onBeauty(mBeauty);
                         isLandmark=aSwitch.isChecked();
@@ -174,17 +179,28 @@ public class MainActivity extends AppCompatActivity {
 
                         FaceTracking.getInstance().Update(data, previewSize.height, previewSize.width);
 
+                        long last=System.currentTimeMillis() - start;
+                        if(FaceTracking.getInstance().getTrackingInfo().size()>0){
 
-                        Log.e("TAG", "====用时=====" + (System.currentTimeMillis() - start));
+                            ms.add(last);
+                            sum=sum+last;
+
+                            long avg=sum/ms.size();
+                            //Log.e("TAG", "====用时=====" + (System.currentTimeMillis() - start));
+                            Log.e("TAG", "====用时avg=====" + avg);
+                        }
+
 
                         boolean rotate270 = cameraOverlap.getOrientation() == 270;
 
                         List<Face> faceActions = FaceTracking.getInstance().getTrackingInfo();
-                        float[][] eyes = null;
+                        //float[][] eyes = null;
                         float[] points = null;
+                        float[] epoints =null;
                         for (Face r : faceActions) {
                             points = new float[106 * 2];
-                            eyes = new float[2][2];
+                            epoints = new float[109 * 2];
+                           // eyes = new float[2][2];
                             for (int i = 0; i < 106; i++) {
                                 float x;
                                 if (rotate270) {
@@ -193,26 +209,17 @@ public class MainActivity extends AppCompatActivity {
                                     x = CameraOverlap.PREVIEW_HEIGHT - r.landmarks[i * 2];
                                 }
                                 float y = r.landmarks[i * 2 + 1] * CameraOverlap.SCALLE_FACTOR;
-                                points[i * 2] = view2openglX(x, CameraOverlap.PREVIEW_HEIGHT);
-                                points[i * 2 + 1] = view2openglY(y, CameraOverlap.PREVIEW_WIDTH);
-
-                                //Log.e("i", String.valueOf(i));
-                                //Log.e("points1:", "("+String.valueOf(points[i*2])+","+String.valueOf(points[i*2+1])+")");
-                                if (i == 53) {
-                                    eyes[0][0] = view2openglX(x, CameraOverlap.PREVIEW_HEIGHT);
-                                    eyes[0][1] = view2openglY(y, CameraOverlap.PREVIEW_WIDTH);
-                                }
-                                if (i == 56) {
-                                    eyes[1][0] = view2openglX(x, CameraOverlap.PREVIEW_HEIGHT);
-                                    eyes[1][1] = view2openglY(y, CameraOverlap.PREVIEW_WIDTH);
-                                }
+                                points[i * 2] = view2openglX(x, previewSize.height);
+                                points[i * 2 + 1] = view2openglY(y, previewSize.width);
                             }
-                            mFrame.setpoints(points);
+                            epoints=FaceTracking.getInstance().calculateExtraFacePoints(points,epoints);
+
+                            mFrame.setpoints(epoints);
                         }
 
                         mFrame.drawFrame(mFramebuffer.drawFrameBuffer(), mFramebuffer.getMatrix());
                         if (points != null&&isLandmark) {
-                            mPoints.setPoints(points);
+                            mPoints.setPoints(epoints);
                             mPoints.drawPoints();
                         }
                         mEglUtils.swap();
@@ -220,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+
 
         mSurfaceView = findViewById(R.id.surface_view);
         mSurfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
@@ -259,6 +267,8 @@ public class MainActivity extends AppCompatActivity {
                         mFramebuffer.release();
                         mFrame.release();
                         mPoints.release();
+                        ms.clear();
+                        sum=0;
                         //mBitmap.release();
                         if (mEglUtils != null) {
                             mEglUtils.release();
@@ -291,6 +301,9 @@ public class MainActivity extends AppCompatActivity {
         seekBarC = findViewById(R.id.seek_bar_c);
         seekBarD = findViewById(R.id.seek_bar_d);
         seekBarE = findViewById(R.id.seek_bar_e);
+        seekBarF = findViewById(R.id.seek_bar_f);
+        seekBarG = findViewById(R.id.seek_bar_g);
+        seekBarH = findViewById(R.id.seek_bar_h);
         aSwitch=findViewById(R.id.switch1);
 
         textViewA =findViewById(R.id.text_view_a);
@@ -298,6 +311,9 @@ public class MainActivity extends AppCompatActivity {
         textViewC =findViewById(R.id.text_view_c);
         textViewD =findViewById(R.id.text_view_d);
         textViewE =findViewById(R.id.text_view_e);
+        textViewF =findViewById(R.id.text_view_f);
+        textViewG =findViewById(R.id.text_view_g);
+        textViewH =findViewById(R.id.text_view_h);
 
     }
 
@@ -318,13 +334,16 @@ public class MainActivity extends AppCompatActivity {
         mBeauty.chinIntensity=(seekBarC.getProgress()-50)/(seekBarC.getMax()*1.0f);// 下巴-1.0f ~ 1.0f
         mBeauty.faceShave=seekBarD.getProgress()/(seekBarD.getMax()*1.0f);// 削脸程度 0.0 ~ 1.0f
         mBeauty.noseThinIntensity=seekBarE.getProgress()/(seekBarE.getMax()*1.0f);// 瘦鼻 0.0 ~ 1.0f
+        mBeauty.mouthEnlargeIntensity=(seekBarF.getProgress()-50)/(seekBarF.getMax()*1.0f);// 嘴型-1.0f ~ 1.0f
+        mBeauty.foreheadIntensity=(seekBarG.getProgress()-50)/(seekBarG.getMax()*1.0f);// 额头-1.0f ~ 1.0f
+        mBeauty.philtrumIntensity=(seekBarH.getProgress()-50)/(seekBarH.getMax()*1.0f);// 人中-1.0f ~ 1.0f
     }
 
     private void bindViews() {
         seekBarA.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textViewA.setText("大眼:" + progress);
+                textViewA.setText("大眼：" + progress);
             }
 
             @Override
@@ -338,7 +357,7 @@ public class MainActivity extends AppCompatActivity {
         seekBarB.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textViewB.setText("瘦脸:" + progress);
+                textViewB.setText("瘦脸：" + progress);
             }
 
             @Override
@@ -352,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
         seekBarC.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textViewC.setText("下巴:" + (progress-50));
+                textViewC.setText("下巴：" + (progress-50));
             }
 
             @Override
@@ -366,7 +385,7 @@ public class MainActivity extends AppCompatActivity {
         seekBarD.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textViewD.setText("削脸:" + progress);
+                textViewD.setText("削脸：" + progress);
             }
 
             @Override
@@ -381,7 +400,52 @@ public class MainActivity extends AppCompatActivity {
         seekBarE.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textViewE.setText("瘦鼻:" + progress);
+                textViewE.setText("瘦鼻：" + progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        seekBarF.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                textViewF.setText("嘴型：" + (progress-50));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        seekBarG.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                textViewG.setText("额头：" + (progress-50));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        seekBarH.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                textViewH.setText("人中：" + (progress-50));
             }
 
             @Override
@@ -394,4 +458,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    public void doReset(View view) {
+        seekBarA.setProgress(30);
+        seekBarB.setProgress(30);
+        seekBarC.setProgress(50);
+        seekBarD.setProgress(30);
+        seekBarE.setProgress(30);
+        seekBarF.setProgress(50);
+        seekBarG.setProgress(50);
+        seekBarH.setProgress(50);
+    }
 }

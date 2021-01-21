@@ -7,9 +7,11 @@ import com.zeusee.main.hyperlandmark.FaceLandmark;
 import com.zeusee.main.hyperlandmark.FacePointsUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.floor;
 
 
 public class FaceTracking {
@@ -149,9 +151,10 @@ public class FaceTracking {
             }
 
             Face face = new Face(faceRect[0], faceRect[1], faceRect[2], faceRect[3], landmarks, id);
-            face.pitch = attitudes[0];
-            face.yaw = attitudes[1];
-            face.roll = attitudes[2];
+            face.pitch = attitudes[0];//-仰头（45）；+低头（45）
+            face.yaw = attitudes[1];//-右看（90）；+左看（90）
+            face.roll = attitudes[2];//-平面向左转（45）；+平面向右转（45）
+            //Log.e("TAG","    "+attitudes[0]+"     "+attitudes[1]+"     "+attitudes[2]);
             if (flag == -2)
                 face.isStable = true;
             else
@@ -165,214 +168,46 @@ public class FaceTracking {
 
     }
 
-
     public List<Face> getTrackingInfo() {
         return faces;
 
     }
-
-    private float view2openglX(float x, int width) {//计算opengl对应点x坐标
-        float centerX = width / 2.0f;
-        float t = x - centerX;
-        return t / centerX;
-    }
-
-    private float view2openglY(float y, int height) {//计算opengl对应点y坐标
-        float centerY = height / 2.0f;
-        float s = centerY - y;
-        return s / centerY;
-    }
-
-
     /**
      * 计算额外人脸顶点，新增8个额外顶点坐标
      * @param vertexPoints
-     * @param index
+     * @param evertexPoints
      */
-    public void calculateExtraFacePoints(float[] vertexPoints, int index) {
-        if (vertexPoints == null || index >= faces.size() || faces.get(index) == null
-                || faces.get(index).landmarks.length + 8 * 2 > vertexPoints.length) {
-            return;
-        }
-        Face oneFace = faces.get(index);
-        float[] points = new float[106 * 2];
-        for (int i = 0; i < 106; i++) {
-            float x;
-            boolean rotate270=true;
-            if (rotate270) {
-                x = oneFace.landmarks[i * 2] * CameraOverlap.SCALLE_FACTOR;
-            } else {
-                x = CameraOverlap.PREVIEW_HEIGHT - oneFace.landmarks[i * 2];
-            }
-            float y =oneFace.landmarks[i * 2 + 1] * CameraOverlap.SCALLE_FACTOR;
-            points[i * 2] = view2openglX(x, height);
-            points[i * 2 + 1] = view2openglY(y, width);
-            //Log.e("i", String.valueOf(i));
-            //Log.e("vertexpoints:", "("+String.valueOf(points[i*2])+","+String.valueOf(points[i*2+1])+")");
-        }
+    public float[] calculateExtraFacePoints(float[] vertexPoints,float[] evertexPoints ) {
 
-        // 复制关键点的数据
-        System.arraycopy(points, 0, vertexPoints, 0, oneFace.landmarks.length);
         // 新增的人脸关键点
         float[] point = new float[2];
-        // 嘴唇中心
-        FacePointsUtils.getCenter(point,
-                vertexPoints[FaceLandmark.mouthUpperLipBottom * 2],
-                vertexPoints[FaceLandmark.mouthUpperLipBottom * 2 + 1],
-                vertexPoints[FaceLandmark.mouthLowerLipTop * 2],
-                vertexPoints[FaceLandmark.mouthLowerLipTop * 2 + 1]
-        );
-        vertexPoints[FaceLandmark.mouthCenter * 2] = point[0];
-        vertexPoints[FaceLandmark.mouthCenter * 2 + 1] = point[1];
-
-        // 左眉心
-        FacePointsUtils.getCenter(point,
-                vertexPoints[FaceLandmark.leftEyebrowUpperMiddle * 2],
-                vertexPoints[FaceLandmark.leftEyebrowUpperMiddle * 2 + 1],
-                vertexPoints[FaceLandmark.leftEyebrowLowerMiddle * 2],
-                vertexPoints[FaceLandmark.leftEyebrowLowerMiddle * 2 + 1]
-        );
-        vertexPoints[FaceLandmark.leftEyebrowCenter * 2] = point[0];
-        vertexPoints[FaceLandmark.leftEyebrowCenter * 2 + 1] = point[1];
-
-        // 右眉心
-        FacePointsUtils.getCenter(point,
-                vertexPoints[FaceLandmark.rightEyebrowUpperMiddle * 2],
-                vertexPoints[FaceLandmark.rightEyebrowUpperMiddle * 2 + 1],
-                vertexPoints[FaceLandmark.rightEyebrowLowerMiddle * 2],
-                vertexPoints[FaceLandmark.rightEyebrowLowerMiddle * 2 + 1]
-        );
-        vertexPoints[FaceLandmark.rightEyebrowCenter * 2] = point[0];
-        vertexPoints[FaceLandmark.rightEyebrowCenter * 2 + 1] = point[1];
-
+        evertexPoints= Arrays.copyOf(vertexPoints,109*2);;
         // 额头中心
-        vertexPoints[FaceLandmark.headCenter * 2] = vertexPoints[FaceLandmark.eyeCenter * 2] * 2.0f - vertexPoints[FaceLandmark.noseLowerMiddle * 2];
-        vertexPoints[FaceLandmark.headCenter * 2 + 1] = vertexPoints[FaceLandmark.eyeCenter * 2 + 1] * 2.0f - vertexPoints[FaceLandmark.noseLowerMiddle * 2 + 1];
+        evertexPoints[FaceLandmark.headCenter * 2] = vertexPoints[FaceLandmark.eyeCenter * 2] * 3.0f - vertexPoints[FaceLandmark.noseTop * 2]*2.0f;
+        evertexPoints[FaceLandmark.headCenter * 2 + 1] = vertexPoints[FaceLandmark.eyeCenter * 2 + 1] * 3.0f - vertexPoints[FaceLandmark.noseTop * 2 + 1]*2.0f;
 
         // 额头左侧，备注：这个点不太准确，后续优化
+
         FacePointsUtils.getCenter(point,
-                vertexPoints[FaceLandmark.leftEyebrowLeftTopCorner * 2],
-                vertexPoints[FaceLandmark.leftEyebrowLeftTopCorner * 2 + 1],
-                vertexPoints[FaceLandmark.headCenter * 2],
-                vertexPoints[FaceLandmark.headCenter * 2 + 1]
+                evertexPoints[FaceLandmark.leftEyebrowLeftTopCorner * 2],
+                evertexPoints[FaceLandmark.leftEyebrowLeftTopCorner * 2 + 1],
+                evertexPoints[FaceLandmark.headCenter * 2],
+                evertexPoints[FaceLandmark.headCenter * 2 + 1]
         );
-        vertexPoints[FaceLandmark.leftHead * 2] = point[0];
-        vertexPoints[FaceLandmark.leftHead * 2 + 1] = point[1];
+        evertexPoints[FaceLandmark.leftHead * 2] = point[0];
+        evertexPoints[FaceLandmark.leftHead * 2 + 1] = evertexPoints[FaceLandmark.headCenter * 2 + 1];
 
         // 额头右侧，备注：这个点不太准确，后续优化
+
         FacePointsUtils.getCenter(point,
-                vertexPoints[FaceLandmark.rightEyebrowRightTopCorner * 2],
-                vertexPoints[FaceLandmark.rightEyebrowRightTopCorner * 2 + 1],
-                vertexPoints[FaceLandmark.headCenter * 2],
-                vertexPoints[FaceLandmark.headCenter * 2 + 1]
+                evertexPoints[FaceLandmark.rightEyebrowRightTopCorner * 2],
+                evertexPoints[FaceLandmark.rightEyebrowRightTopCorner * 2 + 1],
+                evertexPoints[FaceLandmark.headCenter * 2],
+                evertexPoints[FaceLandmark.headCenter * 2 + 1]
         );
-        vertexPoints[FaceLandmark.rightHead * 2] = point[0];
-        vertexPoints[FaceLandmark.rightHead * 2 + 1] = point[1];
+        evertexPoints[FaceLandmark.rightHead * 2] = point[0];
+        evertexPoints[FaceLandmark.rightHead * 2 + 1] = evertexPoints[FaceLandmark.headCenter * 2 + 1];
 
-        // 左脸颊中心
-        FacePointsUtils.getCenter(point,
-                vertexPoints[FaceLandmark.leftCheekEdgeCenter * 2],
-                vertexPoints[FaceLandmark.leftCheekEdgeCenter * 2 + 1],
-                vertexPoints[FaceLandmark.noseLeft * 2],
-                vertexPoints[FaceLandmark.noseLeft * 2 + 1]
-        );
-        vertexPoints[FaceLandmark.leftCheekCenter * 2] = point[0];
-        vertexPoints[FaceLandmark.leftCheekCenter * 2 + 1] = point[1];
-
-        // 右脸颊中心
-        FacePointsUtils.getCenter(point,
-                vertexPoints[FaceLandmark.rightCheekEdgeCenter * 2],
-                vertexPoints[FaceLandmark.rightCheekEdgeCenter * 2 + 1],
-                vertexPoints[FaceLandmark.noseRight * 2],
-                vertexPoints[FaceLandmark.noseRight * 2 + 1]
-        );
-        vertexPoints[FaceLandmark.rightCheekCenter * 2] = point[0];
-        vertexPoints[FaceLandmark.rightCheekCenter * 2 + 1] = point[1];
-    }
-
-    /**
-     * 计算
-     * @param vertexPoints
-     */
-    private void calculateImageEdgePoints(float[] vertexPoints) {
-        if (vertexPoints == null || vertexPoints.length < 122 * 2) {
-            return;
-        }
-
-        if (mOrientation == 0) {
-            vertexPoints[114 * 2] = 0;
-            vertexPoints[114 * 2 + 1] = 1;
-            vertexPoints[115 * 2] = 1;
-            vertexPoints[115 * 2 + 1] = 1;
-            vertexPoints[116 * 2] = 1;
-            vertexPoints[116 * 2 + 1] = 0;
-            vertexPoints[117 * 2] = 1;
-            vertexPoints[117 * 2 + 1] = -1;
-        } else if (mOrientation == 1) {
-            vertexPoints[114 * 2] = 1;
-            vertexPoints[114 * 2 + 1] = 0;
-            vertexPoints[115 * 2] = 1;
-            vertexPoints[115 * 2 + 1] = -1;
-            vertexPoints[116 * 2] = 0;
-            vertexPoints[116 * 2 + 1] = -1;
-            vertexPoints[117 * 2] = -1;
-            vertexPoints[117 * 2 + 1] = -1;
-        } else if (mOrientation == 2) {
-            vertexPoints[114 * 2] = -1;
-            vertexPoints[114 * 2 + 1] = 0;
-            vertexPoints[115 * 2] = -1;
-            vertexPoints[115 * 2 + 1] = 1;
-            vertexPoints[116 * 2] = 0;
-            vertexPoints[116 * 2 + 1] = 1;
-            vertexPoints[117 * 2] = 1;
-            vertexPoints[117 * 2 + 1] = 1;
-        } else if (mOrientation == 3) {
-            vertexPoints[114 * 2] = 0;
-            vertexPoints[114 * 2 + 1] = -1;
-            vertexPoints[115 * 2] = -1;
-            vertexPoints[115 * 2 + 1] = -1;
-            vertexPoints[116 * 2] = -1;
-            vertexPoints[116 * 2 + 1] = 0;
-            vertexPoints[117 * 2] = -1;
-            vertexPoints[117 * 2 + 1] = 1;
-        }
-        // 118 ~ 121 与 114 ~ 117 的顶点坐标恰好反过来
-        vertexPoints[118 * 2] = -vertexPoints[114 * 2];
-        vertexPoints[118 * 2 + 1] = -vertexPoints[114 * 2 + 1];
-        vertexPoints[119 * 2] = -vertexPoints[115 * 2];
-        vertexPoints[119 * 2 + 1] = -vertexPoints[115 * 2 + 1];
-        vertexPoints[120 * 2] = -vertexPoints[116 * 2];
-        vertexPoints[120 * 2 + 1] = -vertexPoints[116 * 2 + 1];
-        vertexPoints[121 * 2] = -vertexPoints[117 * 2];
-        vertexPoints[121 * 2 + 1] = -vertexPoints[117 * 2 + 1];
-
-        // 是否需要做翻转处理，前置摄像头预览时，关键点是做了翻转处理的，因此图像边沿的关键点也要做翻转能处理
-        if (mNeedFlip) {
-            for (int i = 0; i < 8; i++) {
-                vertexPoints[(114 + i) * 2] = -vertexPoints[(114 + i) * 2];
-                vertexPoints[(114 + i) * 2 + 1] = -vertexPoints[(114 + i) * 2 + 1];
-            }
-        }
-
-    }
-    /**
-     * 获取用于美型处理的坐标
-     * @param vertexPoints  顶点坐标，一共122个顶点
-     * @param texturePoints 纹理坐标，一共122个顶点
-     * @param faceIndex     人脸索引
-     */
-    public void updateFaceAdjustPoints(float[] vertexPoints, float[] texturePoints, int faceIndex) {
-        if (vertexPoints == null || vertexPoints.length != 122 * 2
-                || texturePoints == null || texturePoints.length != 122 * 2) {
-            return;
-        }
-        // 计算额外的人脸顶点坐标
-        calculateExtraFacePoints(vertexPoints, faceIndex);
-        // 计算图像边沿顶点坐标
-        calculateImageEdgePoints(vertexPoints);
-        // 计算纹理坐标
-        for (int i = 0; i < vertexPoints.length; i++) {
-            texturePoints[i] = vertexPoints[i] * 0.5f + 0.5f;
-        }
+        return evertexPoints;
     }
 }

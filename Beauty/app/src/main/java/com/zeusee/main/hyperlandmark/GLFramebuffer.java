@@ -13,12 +13,11 @@ public class GLFramebuffer {
 
     private SurfaceTexture surfaceTexture;
     public void initFramebuffer(){
-
+        //创建纹理id
         textures = new int[1];
-        //生成纹理
         GLES20.glGenTextures(1, textures, 0);
-        //生成纹理
         GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, textures[0]);
+
         //设置缩小过滤为使用纹理中坐标最接近的一个像素的颜色作为需要绘制的像素颜色
         GLES20.glTexParameterf(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, GLES20.GL_TEXTURE_MIN_FILTER,
                 GLES20.GL_NEAREST);
@@ -29,6 +28,7 @@ public class GLFramebuffer {
     }
 
     public SurfaceTexture getSurfaceTexture(){
+        //创建SurfaceTexture并传入textures[0]
         surfaceTexture = new SurfaceTexture(textures[0]);
         return surfaceTexture;
     }
@@ -43,8 +43,8 @@ public class GLFramebuffer {
 
     public int drawFrameBuffer(){
         if(surfaceTexture != null){
-            surfaceTexture.updateTexImage();//将Camera采集的数据映射到SurfaceTexture
-            surfaceTexture.getTransformMatrix(mSTMatrix);
+            surfaceTexture.updateTexImage();//用updateTexImage将Camera中新的预览写入纹理
+            surfaceTexture.getTransformMatrix(mSTMatrix);//纹理进行矩阵变换
         }
         return textures[0];
     }
