@@ -9,12 +9,11 @@ import numpy as np
 import cv2
 
 # 图片的本地保存路径，人像和背景     
-path = "./test_images/girl4.jpg"
-pathBack = "./test_images/b2.jpg"
+path = "./test_images/girl3.jpg"
+pathBack = "./test_images/b1.jpg"
 
 # 目标主机url与接口
-# URL = "http://localhost:8501/v1/models/export:predict"
-URL = "http://121.5.57.19:8501/v1/models/export:predict"
+URL = "http://localhost:8501/v1/models/export:predict"
 headers = {"content-type": "application/json"}
 
 # 设定核卷积大小
@@ -53,13 +52,16 @@ else:
 
 new_mask[ new_mask > 128] = 255
 new_mask[ new_mask <= 128 ] = 0
+
+# 滤波与膨胀操作优化边缘
+new_mask = np.float32(new_mask)
+new_mask = cv2.medianBlur(new_mask,5)
+new_mask = cv2.dilate(new_mask, None, iterations = 1)
+
 imgx[ new_mask != 255 ] = 255
 
-# 简单的开操作，让边缘圆滑一些
-erode = cv2.erode(new_mask, None, iterations = 1)
-new_mask = cv2.dilate(erode, None, iterations = 1)
 
-# 截取背景图片到合适的大小
+# 截取背景图片到合适的大小	
 background = resize_background_image(new_mask, cv2.imread(pathBack))
 back_height = background.shape[0]
 back_width = background.shape[1]
@@ -82,4 +84,3 @@ cv2.destroyAllWindows()
 
 # 将图片转化成标准RGB格式
 img = cv2.cvtColor(imgx,cv2.COLOR_BGR2RGB)
-
