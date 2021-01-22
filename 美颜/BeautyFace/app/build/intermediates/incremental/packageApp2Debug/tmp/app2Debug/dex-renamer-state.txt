@@ -1,0 +1,4 @@
+#Sat Jan 09 22:27:46 CST 2021
+base.0=C\:\\Users\\10561\\Desktop\\Beauty\\app\\build\\intermediates\\dex\\app2Debug\\mergeDexApp2Debug\\out
+path.0=classes.dex
+renamed.0=classes.dex

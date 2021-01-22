@@ -1,0 +1,16 @@
+{
+  "buildFiles": [
+    "C:\\Users\\10561\\Desktop\\beauty2.0\\BeautyFace\\app\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "C:\\Users\\10561\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\10561\\Desktop\\beauty2.0\\BeautyFace\\app\\.externalNativeBuild\\cmake\\app2Debug\\armeabi-v7a --target clean"
+  ],
+  "libraries": {
+    "face-Debug-armeabi-v7a": {
+      "artifactName": "face",
+      "buildCommand": "C:\\Users\\10561\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\10561\\Desktop\\beauty2.0\\BeautyFace\\app\\.externalNativeBuild\\cmake\\app2Debug\\armeabi-v7a --target face",
+      "abi": "armeabi-v7a",
+      "output": "C:\\Users\\10561\\Desktop\\beauty2.0\\BeautyFace\\app\\build\\intermediates\\cmake\\app2\\debug\\obj\\armeabi-v7a\\libface.so"
+    }
+  }
+}

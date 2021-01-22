@@ -1,0 +1,38 @@
+
+{
+	"buildFiles" : [ "C:/Users/10561/Desktop/beauty2.0/BeautyFace/app/CMakeLists.txt" ],
+	"cleanCommands" : 
+	[
+		"C:\\Users\\10561\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\10561\\Desktop\\beauty2.0\\BeautyFace\\app\\.externalNativeBuild\\cmake\\app1Debug\\armeabi-v7a --target clean"
+	],
+	"cppFileExtensions" : [ "cpp" ],
+	"libraries" : 
+	{
+		"face-Debug-armeabi-v7a" : 
+		{
+			"abi" : "armeabi-v7a",
+			"artifactName" : "face",
+			"buildCommand" : "C:\\Users\\10561\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\10561\\Desktop\\beauty2.0\\BeautyFace\\app\\.externalNativeBuild\\cmake\\app1Debug\\armeabi-v7a --target face",
+			"buildType" : "debug",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=armv7-none-linux-androideabi19 --gcc-toolchain=C:/Users/10561/AppData/Local/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/10561/AppData/Local/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dface_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -std=c++11 -frtti -fexceptions -O0 -fno-limit-debug-info  -fPIC    -c ",
+					"src" : "C:/Users/10561/Desktop/beauty2.0/BeautyFace/app/src/main/cpp/face.cpp",
+					"workingDirectory" : "C:/Users/10561/Desktop/beauty2.0/BeautyFace/app/.externalNativeBuild/cmake/app1Debug/armeabi-v7a"
+				}
+			],
+			"output" : "C:/Users/10561/Desktop/beauty2.0/BeautyFace/app/build/intermediates/cmake/app1/debug/obj/armeabi-v7a/libface.so",
+			"toolchain" : "3565555921"
+		}
+	},
+	"toolchains" : 
+	{
+		"3565555921" : 
+		{
+			"cCompilerExecutable" : "C:/Users/10561/AppData/Local/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe",
+			"cppCompilerExecutable" : "C:/Users/10561/AppData/Local/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe"
+		}
+	}
+}

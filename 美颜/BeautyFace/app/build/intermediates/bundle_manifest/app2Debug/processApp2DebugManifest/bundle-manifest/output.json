@@ -1,0 +1,1 @@
+[{"outputType":{"type":"BUNDLE_MANIFEST"},"apkData":{"type":"MAIN","splits":[],"versionCode":2,"versionName":"3.0","enabled":true,"outputFile":"app-app2-debug.apk","fullName":"app2Debug","baseName":"app2-debug"},"path":"AndroidManifest.xml","properties":{"packageId":"com.xxx.applicationId2","split":"","minSdkVersion":"19"}}]
