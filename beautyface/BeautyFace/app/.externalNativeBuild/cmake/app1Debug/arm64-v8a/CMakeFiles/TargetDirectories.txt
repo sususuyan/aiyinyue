@@ -1,0 +1,3 @@
+E:/beautyface/aiyinyue/beautyface/BeautyFace/app/.externalNativeBuild/cmake/app1Debug/arm64-v8a/CMakeFiles/face.dir
+E:/beautyface/aiyinyue/beautyface/BeautyFace/app/.externalNativeBuild/cmake/app1Debug/arm64-v8a/CMakeFiles/edit_cache.dir
+E:/beautyface/aiyinyue/beautyface/BeautyFace/app/.externalNativeBuild/cmake/app1Debug/arm64-v8a/CMakeFiles/rebuild_cache.dir
