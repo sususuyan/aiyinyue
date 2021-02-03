@@ -160,9 +160,6 @@ public class MainActivity extends AppCompatActivity {
 
         //mFrame = new GLFrame(this);
         madjust = new GLBeautyadjust(this);
-        //madjust.initFrameBuffer(width,height);
-       // madjust.initFilters();
-        //mBeautyBlurFilter = new GLImageBeautyBlurFilter(this);
 
         mcontext = this;
         mPoints = new GLPoints();

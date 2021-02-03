@@ -60,6 +60,8 @@ public class GLBeautyadjust{
     protected FloatBuffer mFrameBuffer;
     protected int[] mFrameBufferTextures;
     protected int[] mFrameBuffers;
+    // 笛卡尔坐标缓冲
+    private FloatBuffer mCartesianBuffer;
 
     private int mGrayTexture;
     private int mLookupTexture;
@@ -74,6 +76,7 @@ public class GLBeautyadjust{
     private int alphaLoc;
     private int opacityLoc;
     private int intensityLoc;
+    private int mCartesianPointsHandle;
     private float levelRangeInv;
     private float levelBlack;
     private float alpha;
@@ -100,6 +103,8 @@ public class GLBeautyadjust{
             1f,-1f,1,1,
             1f,1f,1,0
     };
+
+    private float[] points= new float[106*2];
     public GLBeautyadjust(Context context) {
         this(context, null, null);
         mVertexBuffer = ByteBuffer.allocateDirect(vertexData.length * 4)
@@ -167,7 +172,7 @@ public class GLBeautyadjust{
         uSTMMatrixHandle2 = GLES30.glGetUniformLocation(mProgramHandle2,"uSTMatrix");
         opacityLoc = GLES30.glGetUniformLocation(mProgramHandle2, "opacity");
         intensityLoc = GLES30.glGetUniformLocation(mProgramHandle2, "intensity1");
-
+        mCartesianPointsHandle = GLES30.glGetUniformLocation(mProgramHandle2, "cartesianPoints");
     }
 
    // @Override
@@ -339,7 +344,9 @@ public class GLBeautyadjust{
         }
         destroyFrameBuffer();
     }
-
+    public void setpoints(float[] points){
+        this.points=points;
+    }
 
     public void onBeauty(BeautyParam beauty) {
         setSkinBeautyIntensity(beauty.beautyIntensity);

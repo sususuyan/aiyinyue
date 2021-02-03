@@ -187,7 +187,7 @@ public class GLFrame {
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, vertexBuffers[1]);
         GLES20.glEnableVertexAttribArray(aTextureCoordHandle);
         GLES20.glVertexAttribPointer(aTextureCoordHandle, 2, GLES20.GL_FLOAT, false, 0, 0);
-/*
+
         //左眼
         float x = points[110]*0.5f+0.5f;
         float y = points[111]*0.5f+0.5f;
@@ -204,7 +204,7 @@ public class GLFrame {
         right.put(y);
         right.position(0);
         GLES20.glUniform2fv(mreHandle,1,right);
-*/
+
 //        GLES20.glUniform2fv(mCartesianPointsHandle,106,mCartesianBuffer);
 
      //   GLES20.glUniform1fv(mReshapeIntensityHandle, 14, FloatBuffer.wrap(mReshapeIntensity));
