@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.android.support:localbroadcastmanager:28.0.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/18984cf7d64c951b106702e2a00a5f11/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/18984cf7d64c951b106702e2a00a5f11/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/18984cf7d64c951b106702e2a00a5f11/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
