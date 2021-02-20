@@ -2,12 +2,9 @@
 目前实现了2种火影手势识别功能。
 
 ## 效果展示
-![WU](https://github.com/sususuyan/aiyinyue/blob/main/Gesture-Recognition/test-image/WU.jpg)
-![CHEN](https://github.com/sususuyan/aiyinyue/blob/main/Gesture-Recognition/test-image/CHEN.jpg)
+![WU](https://github.com/sususuyan/aiyinyue/blob/main/Gesture-Recognition/test-image/WU.jpg?raw=true)
+![CHEN](https://github.com/sususuyan/aiyinyue/blob/main/Gesture-Recognition/test-image/CHEN.jpg?raw=true)
 
-```html
-<center style="font-size:14px;color:#C0C0C0;text-decoration:underline">图1.知乎</center>
-```
 
 ### 备注：
 直接摆出相应手势即可识别
