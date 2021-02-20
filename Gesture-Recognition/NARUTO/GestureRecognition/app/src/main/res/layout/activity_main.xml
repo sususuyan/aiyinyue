@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/preview_display_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:id="@+id/no_camera_access_view"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:gravity="center"
+            android:text="Please grant camera permissions." >
+        </TextView>
+
+    </FrameLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/button_display_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/palmbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:alpha="0.5"
+            android:text="FIVE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible"
+            app:strokeColor="@color/purple_200" />
+
+        <Button
+            android:id="@+id/yeahbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            android:text="YEAH"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible"
+            android:alpha="0.5"
+            />
+        <Button
+            android:id="@+id/heartbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:layout_marginEnd="10dp"
+            android:text="HEART"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible"
+            android:alpha="0.5"
+            />
+        <Button
+            android:id="@+id/fightbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="130dp"
+            android:layout_marginEnd="10dp"
+            android:text="FIGHT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible"
+            android:alpha="0.5"
+            />
+        <Button
+            android:id="@+id/okbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="170dp"
+            android:layout_marginEnd="10dp"
+            android:text="OK"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="invisible"
+            android:alpha="0.5"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/wuview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:src="@drawable/wu"
+            android:visibility="invisible"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/chenview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:src="@drawable/chen"
+            android:visibility="invisible"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/rianview1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:scaleType="center"
+            android:src="@drawable/rain1"
+            tools:visibility="visible"
+            android:visibility="invisible">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/rainview2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:scaleType="center"
+            android:src="@drawable/rain2"
+            tools:visibility="visible"
+            android:visibility="invisible">
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/yeahview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:src="@drawable/champion"
+            tools:visibility="visible"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/okview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:src="@drawable/ok"
+            tools:visibility="visible"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/fightview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:src="@drawable/fight"
+            tools:visibility="visible"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/heartview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:src="@drawable/heart"
+            tools:visibility="visible"
+            android:visibility="invisible" />
+
+    </FrameLayout>
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+<!--    android:visibility="invisible"-->
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--            android:layout_gravity="center|center_horizontal|center_vertical"-->
