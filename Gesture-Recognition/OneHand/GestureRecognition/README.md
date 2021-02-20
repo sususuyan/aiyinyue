@@ -3,10 +3,10 @@
 
 ## 效果展示
 ![Five](https://github.com/sususuyan/aiyinyue/blob/main/Gesture-Recognition/test-image/FIGHT.jpg?raw=true)
-![Five](https://raw.githubusercontent.com/sususuyan/aiyinyue/Gesture-Recognition/test-image/YEAH.jpg)
-![Five](https://raw.githubusercontent.com/sususuyan/aiyinyue/Gesture-Recognition/test-image/HEART.jpg)
-![Five](https://raw.githubusercontent.com/sususuyan/aiyinyue/Gesture-Recognition/test-image/FIGHT.jpg)
-![Five](https://raw.githubusercontent.com/sususuyan/aiyinyue/Gesture-Recognition/test-image/OK.jpg)
+![YEAH](https://github.com/sususuyan/aiyinyue/blob/main/Gesture-Recognition/test-image/YEAH.jpg?raw=true)
+![HEART](https://github.com/sususuyan/aiyinyue/blob/main/Gesture-Recognition/test-image/HEART.jpg?raw=true)
+![FIGHT](https://github.com/sususuyan/aiyinyue/blob/main/Gesture-Recognition/test-image/FIGHT.jpg?raw=true)
+![OK](https://github.com/sususuyan/aiyinyue/blob/main/Gesture-Recognition/test-image/OK.jpg?raw=true)
 
 ### 备注：
 点击相应按钮，即可打开相应手势识别功能。
