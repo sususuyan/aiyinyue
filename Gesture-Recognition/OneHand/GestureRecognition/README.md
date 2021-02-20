@@ -2,7 +2,7 @@
 目前实现了5种单手手势识别功能。
 
 ## 效果展示
-![Five](https://raw.githubusercontent.com/sususuyan/aiyinyue/Gesture-Recognition/test-image/FIVE.jpg)
+![Five](https://github.com/sususuyan/aiyinyue/blob/main/Gesture-Recognition/test-image/FIGHT.jpg?raw=true)
 ![Five](https://raw.githubusercontent.com/sususuyan/aiyinyue/Gesture-Recognition/test-image/YEAH.jpg)
 ![Five](https://raw.githubusercontent.com/sususuyan/aiyinyue/Gesture-Recognition/test-image/HEART.jpg)
 ![Five](https://raw.githubusercontent.com/sususuyan/aiyinyue/Gesture-Recognition/test-image/FIGHT.jpg)
