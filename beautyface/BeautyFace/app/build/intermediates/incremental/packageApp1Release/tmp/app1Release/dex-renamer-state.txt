@@ -1,0 +1,4 @@
+#Thu Mar 04 13:01:58 CST 2021
+base.0=E\:\\beautyface\\aiyinyue\\beautyface\\BeautyFace\\app\\build\\intermediates\\dex\\app1Release\\mergeDexApp1Release\\out
+path.0=classes.dex
+renamed.0=classes.dex

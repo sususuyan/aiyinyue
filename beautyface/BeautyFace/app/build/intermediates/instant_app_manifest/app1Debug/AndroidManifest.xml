@@ -21,9 +21,8 @@
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
-        android:icon="@drawable/ic_logo"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/beautyFace1"
-        android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity

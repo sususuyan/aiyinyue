@@ -37,20 +37,20 @@ android {
             // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
             resValue "string", "beautyFace1", "美颜"
             // 定义app_icon等字段，在AndroidManifest.xml文件中用到
-            manifestPlaceholders = [app_icon     : "@drawable/ic_logo",
+            manifestPlaceholders = [app_icon     : "@drawable/ic_launcher",
                                     app_roundicon: "@mipmap/ic_launcher1",
                                     // 因为每个APP包名不同，所以需要单独配置每个APP的第三方key
                                     // 修改 AndroidManifest.xml 里 地图appkey
                                     map_appkey   : "111111"]
         }
         // app2
-        app2 {
-            applicationId "com.zeusee.main.beautyFace"
-            resValue "string", "beautyFace2", "beautyFace"
-            manifestPlaceholders = [app_icon     : "@mipmap/ic_launcher2",
-                                    app_roundicon: "@mipmap/ic_launcher2",
-                                    map_appkey   : "222222"]
-        }
+//        app2 {
+//            applicationId "com.zeusee.main.beautyFace"
+//            resValue "string", "beautyFace2", "beautyFace"
+//            manifestPlaceholders = [app_icon     : "@mipmap/ic_launcher",
+//                                    app_roundicon: "@mipmap/ic_launcher2",
+//                                    map_appkey   : "222222"]
+//        }
     }
     android.applicationVariants.all {
         variant ->

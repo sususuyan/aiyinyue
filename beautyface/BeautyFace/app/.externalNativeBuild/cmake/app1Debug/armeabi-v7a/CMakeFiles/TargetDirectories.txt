@@ -1,3 +1,3 @@
-C:/Users/10561/Desktop/beauty2.0/BeautyFace/app/.externalNativeBuild/cmake/app1Debug/armeabi-v7a/CMakeFiles/face.dir
-C:/Users/10561/Desktop/beauty2.0/BeautyFace/app/.externalNativeBuild/cmake/app1Debug/armeabi-v7a/CMakeFiles/edit_cache.dir
-C:/Users/10561/Desktop/beauty2.0/BeautyFace/app/.externalNativeBuild/cmake/app1Debug/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+E:/beautyface/aiyinyue/beautyface/BeautyFace/app/.externalNativeBuild/cmake/app1Debug/armeabi-v7a/CMakeFiles/face.dir
+E:/beautyface/aiyinyue/beautyface/BeautyFace/app/.externalNativeBuild/cmake/app1Debug/armeabi-v7a/CMakeFiles/edit_cache.dir
+E:/beautyface/aiyinyue/beautyface/BeautyFace/app/.externalNativeBuild/cmake/app1Debug/armeabi-v7a/CMakeFiles/rebuild_cache.dir
