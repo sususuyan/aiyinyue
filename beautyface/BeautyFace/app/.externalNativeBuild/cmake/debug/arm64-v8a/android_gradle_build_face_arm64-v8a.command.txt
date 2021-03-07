@@ -1,7 +1,7 @@
 Executable : C:\Users\10561\AppData\Local\Android\Sdk\cmake\3.6.4111459\bin\cmake.exe
 arguments : 
 --build
-C:\Users\10561\Desktop\Beauty\app\.externalNativeBuild\cmake\debug\arm64-v8a
+E:\beautyface\aiyinyue\beautyface\BeautyFace\app\.externalNativeBuild\cmake\debug\arm64-v8a
 --target
 face
 jvmArgs : 

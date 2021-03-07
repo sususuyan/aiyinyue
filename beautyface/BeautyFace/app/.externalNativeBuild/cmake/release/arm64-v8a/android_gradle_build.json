@@ -1,9 +1,9 @@
 
 {
-	"buildFiles" : [ "C:/Users/10561/Desktop/Beauty/app/CMakeLists.txt" ],
+	"buildFiles" : [ "E:/beautyface/aiyinyue/beautyface/BeautyFace/app/CMakeLists.txt" ],
 	"cleanCommands" : 
 	[
-		"C:\\Users\\10561\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\10561\\Desktop\\Beauty\\app\\.externalNativeBuild\\cmake\\release\\arm64-v8a --target clean"
+		"C:\\Users\\10561\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build E:\\beautyface\\aiyinyue\\beautyface\\BeautyFace\\app\\.externalNativeBuild\\cmake\\release\\arm64-v8a --target clean"
 	],
 	"cppFileExtensions" : [ "cpp" ],
 	"libraries" : 
@@ -12,18 +12,18 @@
 		{
 			"abi" : "arm64-v8a",
 			"artifactName" : "face",
-			"buildCommand" : "C:\\Users\\10561\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\10561\\Desktop\\Beauty\\app\\.externalNativeBuild\\cmake\\release\\arm64-v8a --target face",
+			"buildCommand" : "C:\\Users\\10561\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build E:\\beautyface\\aiyinyue\\beautyface\\BeautyFace\\app\\.externalNativeBuild\\cmake\\release\\arm64-v8a --target face",
 			"buildType" : "release",
 			"files" : 
 			[
 				
 				{
 					"flags" : "  --target=aarch64-none-linux-android21 --gcc-toolchain=C:/Users/10561/AppData/Local/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/10561/AppData/Local/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Dface_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++11 -frtti -fexceptions -O2 -DNDEBUG  -fPIC    -c ",
-					"src" : "C:/Users/10561/Desktop/Beauty/app/src/main/cpp/face.cpp",
-					"workingDirectory" : "C:/Users/10561/Desktop/Beauty/app/.externalNativeBuild/cmake/release/arm64-v8a"
+					"src" : "E:/beautyface/aiyinyue/beautyface/BeautyFace/app/src/main/cpp/face.cpp",
+					"workingDirectory" : "E:/beautyface/aiyinyue/beautyface/BeautyFace/app/.externalNativeBuild/cmake/release/arm64-v8a"
 				}
 			],
-			"output" : "C:/Users/10561/Desktop/Beauty/app/build/intermediates/cmake/release/obj/arm64-v8a/libface.so",
+			"output" : "E:/beautyface/aiyinyue/beautyface/BeautyFace/app/build/intermediates/cmake/release/obj/arm64-v8a/libface.so",
 			"toolchain" : "3565555921"
 		}
 	},

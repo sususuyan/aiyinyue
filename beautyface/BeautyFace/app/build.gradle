@@ -1,9 +1,9 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 30
     defaultConfig {
-        applicationId "com.zeusee.main.beautyFace"
+//        applicationId "com.zeusee.main.beautyFace"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 2
@@ -28,21 +28,21 @@ android {
         }
     }
 
-    productFlavors {
+ //   productFlavors {
         // 通用app
-        app1 {
-            // 设置applicationId（这里很重要，两个相同applicationId的apk不同同时安装在同一台Android手机中）
-            applicationId "com.zeusee.main.beautyFace"
-            // 自动生成@string/app_name为 app1的名称
-            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
-            resValue "string", "beautyFace1", "美颜"
-            // 定义app_icon等字段，在AndroidManifest.xml文件中用到
-            manifestPlaceholders = [app_icon     : "@drawable/ic_launcher",
-                                    app_roundicon: "@mipmap/ic_launcher1",
-                                    // 因为每个APP包名不同，所以需要单独配置每个APP的第三方key
-                                    // 修改 AndroidManifest.xml 里 地图appkey
-                                    map_appkey   : "111111"]
-        }
+//        app1 {
+//            // 设置applicationId（这里很重要，两个相同applicationId的apk不同同时安装在同一台Android手机中）
+//            applicationId "com.zeusee.main.beautyFace"
+//            // 自动生成@string/app_name为 app1的名称
+//            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
+//            resValue "string", "beautyFace1", "美颜"
+//            // 定义app_icon等字段，在AndroidManifest.xml文件中用到
+//            manifestPlaceholders = [app_icon     : "@drawable/ic_launcher",
+//                                    app_roundicon: "@mipmap/ic_launcher1",
+//                                    // 因为每个APP包名不同，所以需要单独配置每个APP的第三方key
+//                                    // 修改 AndroidManifest.xml 里 地图appkey
+//                                    map_appkey   : "111111"]
+//        }
         // app2
 //        app2 {
 //            applicationId "com.zeusee.main.beautyFace"
@@ -51,14 +51,14 @@ android {
 //                                    app_roundicon: "@mipmap/ic_launcher2",
 //                                    map_appkey   : "222222"]
 //        }
-    }
-    android.applicationVariants.all {
-        variant ->
-            variant.outputs.all {
-                //这里修改apk文件名
-                outputFileName = "美颜_v${defaultConfig.versionName}_${buildType.name}.apk"
-            }
-    }
+  //  }
+//    android.applicationVariants.all {
+//        variant ->
+//            variant.outputs.all {
+//                //这里修改apk文件名
+//                outputFileName = "美颜_v${defaultConfig.versionName}_${buildType.name}.apk"
+//            }
+//    }
 
 
     externalNativeBuild {

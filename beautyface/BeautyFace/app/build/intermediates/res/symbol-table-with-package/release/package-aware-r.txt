@@ -734,9 +734,7 @@ id search_src_text
 id search_voice_btn
 id seek_bar_a
 id seek_bar_b
-id seek_bar_c
 id seek_bar_d
-id seek_bar_e
 id select_dialog_listview
 id shortcut
 id spacer
@@ -763,9 +761,7 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id text_view_a
 id text_view_b
-id text_view_c
 id text_view_d
-id text_view_e
 id time
 id title
 id titleDividerNoCustom

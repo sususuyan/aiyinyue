@@ -1,7 +1,3 @@
 # ninja log v5
-1	2624	0	CMakeFiles/face.dir/src/main/cpp/face.cpp.o	42f030c8cb073950
-2627	4981	0	../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libface.so	e73c7acaaf0c7aea
-7	2921	0	CMakeFiles/face.dir/src/main/cpp/face.cpp.o	42f030c8cb073950
-2922	5298	0	../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libface.so	e73c7acaaf0c7aea
-6	1160	0	CMakeFiles/face.dir/src/main/cpp/face.cpp.o	42f030c8cb073950
-1160	3007	0	../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libface.so	e73c7acaaf0c7aea
+0	932	0	CMakeFiles/face.dir/src/main/cpp/face.cpp.o	722281a7ec5086a4
+934	1871	0	../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libface.so	e73c7acaaf0c7aea

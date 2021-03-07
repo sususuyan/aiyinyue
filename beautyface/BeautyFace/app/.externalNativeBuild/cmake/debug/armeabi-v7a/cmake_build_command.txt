@@ -1,10 +1,10 @@
 Executable : C:\Users\10561\AppData\Local\Android\Sdk\cmake\3.6.4111459\bin\cmake.exe
 arguments : 
--HC:\Users\10561\Desktop\Beauty\app
--BC:\Users\10561\Desktop\Beauty\app\.externalNativeBuild\cmake\debug\armeabi-v7a
+-HE:\beautyface\aiyinyue\beautyface\BeautyFace\app
+-BE:\beautyface\aiyinyue\beautyface\BeautyFace\app\.externalNativeBuild\cmake\debug\armeabi-v7a
 -DANDROID_ABI=armeabi-v7a
 -DANDROID_PLATFORM=android-19
--DCMAKE_LIBRARY_OUTPUT_DIRECTORY=C:\Users\10561\Desktop\Beauty\app\build\intermediates\cmake\debug\obj\armeabi-v7a
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=E:\beautyface\aiyinyue\beautyface\BeautyFace\app\build\intermediates\cmake\debug\obj\armeabi-v7a
 -DCMAKE_BUILD_TYPE=Debug
 -DANDROID_NDK=C:\Users\10561\AppData\Local\Android\Sdk\ndk\21.3.6528147
 -DCMAKE_CXX_FLAGS=-std=c++11 -frtti -fexceptions

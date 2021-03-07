@@ -1,5 +1,6 @@
 package com.zeusee.main.hyperlandmark;
-
+//-*-coding:utf-8 -*-
+//by 陈金鹏 2021.3.7
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -31,7 +32,19 @@ import java.io.File;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
-
+//Copyright Hyperlandmark
+//
+//Licensed under the Apache License, Version 2.0(the"License")
+//you may not use this file except in compliance with the Lincense.
+//You may obtain  a copy  of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+//Unless required by application law or agreed to in writing, software
+//distributed under the Lincense is distributed on an "AS IS"  BASIS,
+//WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//See the License for the specific language governing permissions and
+//limitations under the License.
 
 public class MainActivity extends AppCompatActivity {
     void InitModelFiles() {
@@ -323,16 +336,16 @@ public class MainActivity extends AppCompatActivity {
         }
         seekBarA = findViewById(R.id.seek_bar_a);
         seekBarB = findViewById(R.id.seek_bar_b);
-        seekBarC = findViewById(R.id.seek_bar_c);
+        //seekBarC = findViewById(R.id.seek_bar_c);
         seekBarD = findViewById(R.id.seek_bar_d);
-        seekBarE = findViewById(R.id.seek_bar_e);
+        //seekBarE = findViewById(R.id.seek_bar_e);
         aSwitch=findViewById(R.id.switch1);
 
         textViewA =findViewById(R.id.text_view_a);
         textViewB =findViewById(R.id.text_view_b);
-        textViewC =findViewById(R.id.text_view_c);
+        //textViewC =findViewById(R.id.text_view_c);
         textViewD =findViewById(R.id.text_view_d);
-        textViewE =findViewById(R.id.text_view_e);
+        //textViewE =findViewById(R.id.text_view_e);
 
     }
 
@@ -350,9 +363,9 @@ public class MainActivity extends AppCompatActivity {
     private void setBeautyParam(){
         //mBeauty.eyeEnlargeIntensity=seekBarA.getProgress()/(seekBarA.getMax()*1.0f);// 大眼 0.0f ~ 1.0f
         mBeauty.faceLift=seekBarB.getProgress()/(seekBarB.getMax()*1.0f);// 瘦脸程度 0.0 ~ 1.0f
-        mBeauty.chinIntensity=(seekBarC.getProgress()-50)/(seekBarC.getMax()*1.0f);// 下巴-1.0f ~ 1.0f
+        //mBeauty.chinIntensity=(seekBarC.getProgress()-50)/(seekBarC.getMax()*1.0f);// 下巴-1.0f ~ 1.0f
         mBeauty.complexionIntensity=seekBarD.getProgress()/(seekBarD.getMax()*1.0f);// 美白程度 0.0 ~ 1.0f
-        mBeauty.noseThinIntensity=seekBarE.getProgress()/(seekBarE.getMax()*1.0f);// 瘦鼻 0.0 ~ 1.0f
+        //mBeauty.noseThinIntensity=seekBarE.getProgress()/(seekBarE.getMax()*1.0f);// 瘦鼻 0.0 ~ 1.0f
         mBeauty.beautyIntensity = seekBarA.getProgress()/(seekBarA.getMax()*1.0f);//磨皮 0.0 ~ 1.0f
     }
 
@@ -386,20 +399,20 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-        seekBarC.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textViewC.setText("下巴:" + (progress-50));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
+//        seekBarC.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                textViewC.setText("下巴:" + (progress-50));
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//            }
+//        });
         seekBarD.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -415,20 +428,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        seekBarE.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textViewE.setText("瘦鼻:" + progress);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
+//        seekBarE.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                textViewE.setText("瘦鼻:" + progress);
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//            }
+//        });
     }
 
 }

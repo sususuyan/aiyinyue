@@ -7,24 +7,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <application
-
-        android:allowBackup="true"
-        android:icon="${app_icon}"
-        android:label="@string/beautyFace1"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:replace="android:allowBackup">
-        <activity
-            android:name="com.zeusee.main.hyperlandmark.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+    <application>
+            <activity
+                android:name="com.zeusee.main.hyperlandmark.MainActivity">
+            </activity>
     </application>
     <meta-data
         android:name="com.amap.api.v2.apikey"

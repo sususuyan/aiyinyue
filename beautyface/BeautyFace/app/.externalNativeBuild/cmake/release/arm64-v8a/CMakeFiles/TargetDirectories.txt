@@ -1,3 +1,3 @@
-C:/Users/10561/Desktop/Beauty/app/.externalNativeBuild/cmake/release/arm64-v8a/CMakeFiles/face.dir
-C:/Users/10561/Desktop/Beauty/app/.externalNativeBuild/cmake/release/arm64-v8a/CMakeFiles/edit_cache.dir
-C:/Users/10561/Desktop/Beauty/app/.externalNativeBuild/cmake/release/arm64-v8a/CMakeFiles/rebuild_cache.dir
+E:/beautyface/aiyinyue/beautyface/BeautyFace/app/.externalNativeBuild/cmake/release/arm64-v8a/CMakeFiles/face.dir
+E:/beautyface/aiyinyue/beautyface/BeautyFace/app/.externalNativeBuild/cmake/release/arm64-v8a/CMakeFiles/edit_cache.dir
+E:/beautyface/aiyinyue/beautyface/BeautyFace/app/.externalNativeBuild/cmake/release/arm64-v8a/CMakeFiles/rebuild_cache.dir

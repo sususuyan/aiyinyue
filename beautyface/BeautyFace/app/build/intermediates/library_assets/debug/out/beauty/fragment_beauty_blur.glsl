@@ -78,9 +78,16 @@ vec2 coordinate = textureCoordinate.xy;
          vec4 test1 = sourceColor - blurColor;
         //vec4 highPassColor = vec4(1.0,1.0,1.0,1.0) - blurColor;
          // 对应混合模式中的强光模式(color = 2.0 * color1 * color2)，对于高反差的颜色来说，color1 和color2 是同一个
-         highPassColor.r = clamp(2.0 * highPassColor.r * highPassColor.r * (intensity1*20.0+20.0)*30.0, 0.0, 1.0);
-         highPassColor.g = clamp(2.0 * highPassColor.g * highPassColor.g * (intensity1*20.0+20.0)*30.0, 0.0, 1.0);
-         highPassColor.b = clamp(2.0 * highPassColor.b * highPassColor.b * (intensity1*20.0+20.0)*30.0, 0.0, 1.0);
+                  if(opacity<0.7){
+                  highPassColor.r = clamp(2.0 * highPassColor.r * highPassColor.r * (intensity1*20.0+20.0)*30.0, 0.0, 1.0);
+                  highPassColor.g = clamp(2.0 * highPassColor.g * highPassColor.g * (intensity1*20.0+20.0)*30.0, 0.0, 1.0);
+                  highPassColor.b = clamp(2.0 * highPassColor.b * highPassColor.b * (intensity1*20.0+20.0)*30.0, 0.0, 1.0);
+                  }
+                  else{
+                  highPassColor.r = clamp(2.0 * highPassColor.r * highPassColor.r * (intensity*20.0+20.0)*30.0, 0.0, 1.0);
+                  highPassColor.g = clamp(2.0 * highPassColor.g * highPassColor.g * (intensity*20.0+20.0)*30.0, 0.0, 1.0);
+                  highPassColor.b = clamp(2.0 * highPassColor.b * highPassColor.b * (intensity*20.0+20.0)*30.0, 0.0, 1.0);
+                  }
 //磨皮
           //currentColor = vec4(highPassColor.rgb, 1.0);
           //sourceColor = vec4(textureColor, 1.0);

@@ -1,25 +1,25 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-31:12
-INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-31:12
+ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-19:12
+INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-19:12
 	package
 		ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:4:5-44
 		INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml
 		INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml
-		ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-31:12
+		ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-19:12
 		INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml
-		ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-31:12
+		ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:1-19:12
 		INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:2:11-69
@@ -36,13 +36,17 @@ ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidMani
 	android:name
 		ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:8:22-77
 application
-ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:10:5-26:19
-meta-data#com.amap.api.v2.apikey
-ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:27:5-29:40
-	android:value
-		ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:29:9-38
+ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:10:5-14:19
+activity#com.zeusee.main.hyperlandmark.MainActivity
+ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:11:13-13:24
 	android:name
-		ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:28:9-46
+		ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:12:17-74
+meta-data#com.amap.api.v2.apikey
+ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:15:5-17:40
+	android:value
+		ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:17:9-38
+	android:name
+		ADDED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml:16:9-46
 uses-sdk
 INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from E:\beautyface\aiyinyue\beautyface\BeautyFace\app\src\main\AndroidManifest.xml
