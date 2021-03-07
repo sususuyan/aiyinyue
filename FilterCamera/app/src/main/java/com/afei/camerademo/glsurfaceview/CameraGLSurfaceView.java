@@ -31,12 +31,12 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
     private int previewWidth = 0;
     private int previewHeight = 0;
 
-
-
     private int Filter = 0;
     private int FilterImage;
 
-    private float strength = 0.4f;
+    private float strength = 0.5f;
+
+    private boolean takePicture = false;
 
     private Context mContext;
 
@@ -87,7 +87,8 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
     public void onDrawFrame(GL10 gl) {
         FilterImage = getFilter();
         mSurfaceTexture.updateTexImage();
-        mDrawer.draw(mTextureId, mCameraProxy.isFrontCamera(), mContext, mRatioWidth, mRatioHeight, FilterImage, strength);
+        mDrawer.draw(mTextureId, mCameraProxy.isFrontCamera(), mContext, previewWidth, previewHeight, FilterImage, strength, takePicture);
+        takePicture = false;
     }
 
     @Override
@@ -99,8 +100,10 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
         if (width < 0 || height < 0) {
             throw new IllegalArgumentException("Size cannot be negative.");
         }
-        mRatioWidth = width;
-        mRatioHeight = height;
+        //mRatioWidth = width;
+        //mRatioHeight = height;
+        previewWidth = width;
+        previewHeight = height;
         post(new Runnable() {
             @Override
             public void run() {
@@ -122,6 +125,7 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
+        /*
         if (0 == mRatioWidth || 0 == mRatioHeight) {
             setMeasuredDimension(width, height);
         } else {
@@ -129,6 +133,17 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
                 setMeasuredDimension(width, width * mRatioHeight / mRatioWidth);
             } else {
                 setMeasuredDimension(height * mRatioWidth / mRatioHeight, height);
+            }
+        }
+
+         */
+        if (0 == previewWidth || 0 == previewHeight) {
+            setMeasuredDimension(width, height);
+        } else {
+            if (width < height * previewWidth / previewHeight) {
+                setMeasuredDimension(width, width * previewHeight / previewWidth);
+            } else {
+                setMeasuredDimension(height * previewWidth / previewHeight, height);
             }
         }
     }
@@ -166,23 +181,57 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
     }
 
     public void setFilter(){
-        Filter = (Filter+1)%3;
+        Filter = (Filter+1) % 12 ;
     }
 
     public int getFilter(){
         switch (Filter){
             case 0:
+                //清新
                 return R.drawable.slowlived;
             case 1:
+                //黑白
                 return R.drawable.heibai;
             case 2:
+                //风景-鲜艳
                 return R.drawable.hadean;
+            case 3:
+                //复古
+                return R.drawable.fugu;
+            case 4:
+                //白皙
+                return R.drawable.baixi;
+            case 5:
+                //初恋
+                return R.drawable.chulian;
+            case 6:
+                //过往
+                return R.drawable.guowang;
+            case 7:
+                //泡沫
+                return R.drawable.paomose;
+            case 8:
+                //冷艳
+                return R.drawable.lengyanruihua;
+            case 9:
+                //暖色
+                return R.drawable.warm;
+            case 10:
+                //自然
+                return R.drawable.mengjing;
+            case 11:
+                //富士山
+                return R.drawable.fushi;
         }
         return R.drawable.slowlived;
     }
 
     public void setStrength(float num){
         strength = num;
+    }
+
+    public void setTakePicture(){
+        takePicture = true;
     }
 
 }

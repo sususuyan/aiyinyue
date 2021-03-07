@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mList.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         data=new ArrayList<>();
         add("GLSurfaceView+Camera",GLSurfaceCameraActivity.class);
-        add("3DObj",ObjLoadActivity.class);
-        add("3DTexture", TextureLoadActivity.class);
+        //add("3DObj",ObjLoadActivity.class);
+        //add("3DTexture", TextureLoadActivity.class);
         mList.setAdapter(new MenuAdapter());
     }
 

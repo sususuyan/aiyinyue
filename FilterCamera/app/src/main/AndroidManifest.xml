@@ -25,19 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".surfaceview.SurfaceCameraActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".textureview.TextureCameraActivity"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".glsurfaceview.GLSurfaceCameraActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".surfaceview.SurfaceCamera2Activity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".textureview.TextureCamera2Activity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".obj.ObjLoadActivity"

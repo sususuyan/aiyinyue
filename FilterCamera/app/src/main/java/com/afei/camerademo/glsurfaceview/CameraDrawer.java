@@ -6,12 +6,20 @@ import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.GLES30;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.afei.camerademo.ImageUtils;
 import com.afei.camerademo.R;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+
+import static com.afei.camerademo.ImageUtils.saveBitmap;
 
 public class CameraDrawer {
 
@@ -20,7 +28,7 @@ public class CameraDrawer {
     private FloatBuffer mFrontTextureBuffer;
     private FloatBuffer mFboTextureBuffer;
     private ByteBuffer mDrawListBuffer;
-    //private ByteBuffer mBuffer;
+    private ByteBuffer mBuffer;
     private int mProgram;
     private int fboProgram;
     private int mPositionHandle;
@@ -87,13 +95,15 @@ public class CameraDrawer {
         mPositionHandle = GLES20.glGetAttribLocation(mProgram, "vPosition");
         mTextureHandle = GLES20.glGetAttribLocation(mProgram, "inputTextureCoordinate");
 
-        String FBO_FRAGMENT_SHADER = OpenGLUtils.readRawTxt(context, R.raw.fragment_shader);
-        fboProgram = OpenGLUtils.createProgram(VERTEX_SHADER, FBO_FRAGMENT_SHADER);
-        fboPositionHandle = GLES20.glGetAttribLocation(fboProgram, "vPosition");
-        fboTextureHandle = GLES20.glGetAttribLocation(fboProgram, "inputTextureCoordinate");
+        String FBO_VERTEX_SHADER = OpenGLUtils.readRawTxt(context, R.raw.vertex_gaussian);
+        String FBO_FRAGMENT_SHADER = OpenGLUtils.readRawTxt(context, R.raw.fragment_gaussian);
+        fboProgram = OpenGLUtils.createProgram(FBO_VERTEX_SHADER, FBO_FRAGMENT_SHADER);
+        fboPositionHandle = GLES20.glGetAttribLocation(fboProgram, "aPosition");
+        fboTextureHandle = GLES20.glGetAttribLocation(fboProgram, "aTextureCoord");
     }
 
-    public void draw(int texture, boolean isFrontCamera, Context context, int width, int height, int FilterImage, float strength) {
+    public void draw(int texture, boolean isFrontCamera, Context context, int width, int height, int FilterImage, float strength, boolean takePicture) {
+
 
         //FBO离屏渲染
         int[] FBOId = new int[1];
@@ -117,12 +127,10 @@ public class CameraDrawer {
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
 
-        //mBuffer = ByteBuffer.allocate(width * height * 4);
-
         //清空颜色
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
         //设置背景颜色
-        GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         GLES20.glUseProgram(mProgram); // 指定使用的program
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, FBOId[0]);
         GLES20.glEnable(GLES20.GL_CULL_FACE); // 启动剔除
@@ -142,6 +150,8 @@ public class CameraDrawer {
         int controlindex = GLES20.glGetUniformLocation(mProgram, "strength");
         GLES20.glUniform1f(controlindex, strength);
 
+
+
         GLES20.glEnableVertexAttribArray(mPositionHandle);
         GLES20.glVertexAttribPointer(mPositionHandle, VERTEX_SIZE, GLES20.GL_FLOAT, false, VERTEX_STRIDE, mVertexBuffer);
 
@@ -158,22 +168,42 @@ public class CameraDrawer {
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
         GLES20.glDeleteTextures(1, LUTTextureId, 0);
 
-        //GLES20.glReadPixels(0, 0, width, height, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, mBuffer);
+        if(takePicture) {
+            GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, FBOId[0]);
+            mBuffer = ByteBuffer.allocate(width * height * 4);
+            GLES20.glReadPixels(0, 0, width, height, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, mBuffer);
+            Log.e("take picture","callback success");
+            int rotation = 180;
+            Bitmap bitmap=Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
+            bitmap.copyPixelsFromBuffer(mBuffer);
+            Bitmap rotateBitmap = ImageUtils.rotateBitmap(bitmap, rotation, isFrontCamera, true);
+            saveBitmap(rotateBitmap);
+            mBuffer.clear();
+            GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+        }
 
 
 
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
         //设置背景颜色
-        GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         //使用程序
         GLES20.glUseProgram(fboProgram);
         //设置纹理
         //绑定渲染纹理  默认是第0个位置
 
-        int FBOTexture = GLES20.glGetUniformLocation(fboProgram, "s_texture");
+        int FBOTexture = GLES20.glGetUniformLocation(fboProgram, "inputTexture");
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, FBOTextureId[0]);
         GLES20.glUniform1i(FBOTexture, 0);
+
+        float texelWidthOffset = 1.0f/ width ;
+        int texelWidthHandle = GLES20.glGetUniformLocation(fboProgram, "texelWidthOffset");
+        GLES20.glUniform1f(texelWidthHandle, texelWidthOffset);
+
+        float texelHeightOffset = 1.0f/ height;
+        int texelHeightHandle = GLES20.glGetUniformLocation(fboProgram, "texelHeightOffset");
+        GLES20.glUniform1f(texelHeightHandle, texelHeightOffset);
 
         GLES20.glEnableVertexAttribArray(fboPositionHandle);
         GLES20.glVertexAttribPointer(fboPositionHandle, VERTEX_SIZE, GLES20.GL_FLOAT, false, VERTEX_STRIDE, mVertexBuffer);
@@ -190,4 +220,6 @@ public class CameraDrawer {
         GLES20.glDeleteFramebuffers(1, FBOId, 0);
 
     }
+
+
 }

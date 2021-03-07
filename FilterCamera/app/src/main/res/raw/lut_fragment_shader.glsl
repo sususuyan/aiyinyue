@@ -9,11 +9,11 @@ void main() {
 
   lowp vec4 textureColor = texture2D(s_Texture, textureCoordinate);
 
-
+  //使用输入的蓝色，定位方格
   mediump float blueColor = textureColor.b * 63.0;
 
   mediump vec2 quad1;
-  quad1.y = floor(blueColor/8.0);
+  quad1.y = floor(floor(blueColor)/8.0);
   quad1.x = floor(blueColor) - (quad1.y * 8.0);
 
   mediump vec2 quad2;
