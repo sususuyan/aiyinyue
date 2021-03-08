@@ -76,7 +76,6 @@ public class GLFrame {
             "    vTexCoord = aTexCoord;\n" +
             "    gl_Position = aPosition;\n" +
             "}";
-
 //    private String cubeFragmentShader = "precision mediump float;\n"+
 //            "varying vec2 vTexCoord;\n"+
 //            "uniform sampler2D iTexture;\n"+
@@ -175,7 +174,6 @@ public class GLFrame {
 
         GLES20.glEnableVertexAttribArray(aTextureCoordHandle);
         GLES20.glVertexAttribPointer(aTextureCoordHandle, 2, GLES20.GL_FLOAT, false, 0, textureVertexBuffer);
-        GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
 
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
         GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, textureId);

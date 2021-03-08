@@ -21,7 +21,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 
@@ -97,8 +99,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private CameraGLSurfaceView  mCameraView;
+    private Switch aSwitch;
+    private Switch bSwitch;
     private void init() {
         mCameraView = findViewById(R.id.camera_view);
+        aSwitch = findViewById(R.id.stickerType);
+        bSwitch = findViewById(R.id.stickerName);
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    mCameraView.setStickerType(2);
+                }
+                else {
+                    mCameraView.setStickerType(1);
+                }
+            }
+        });
+        bSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    mCameraView.loadSticker2D("cat");
+                }
+                else {
+                    mCameraView.loadSticker2D("mouse");
+                }
+            }
+        });
     }
 
 

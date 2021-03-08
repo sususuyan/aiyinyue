@@ -1,11 +1,15 @@
 package com.zeusee.main.hyperlandmark.jni;
 
 import com.zeusee.main.hyperlandmark.CameraOverlap;
+import com.zeusee.main.hyperlandmark.CameraProxy;
+import com.zeusee.main.hyperlandmark.utils.FacePointsUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.floor;
 
 
 public class FaceTracking {
@@ -66,7 +70,7 @@ public class FaceTracking {
     public void FaceTrackingInit(String pathModel, int height, int width) {
         session = createSession(pathModel);
         faces = new ArrayList<Face>();
-        initTracker(height, width, CameraOverlap.SCALLE_FACTOR, session);
+        initTracker(height, width, CameraProxy.SCALLE_FACTOR, session);
     }
 
     public boolean postProcess(int[] landmark_prev, int[] landmark_curr) {
@@ -155,5 +159,36 @@ public class FaceTracking {
     public List<Face> getTrackingInfo() {
         return faces;
 
+    }
+
+    public float[] calculateExtraFacePoints(float[] vertexPoints){
+        float [] point = new float[2];
+        float[] evertexPoints= Arrays.copyOf(vertexPoints,109*2);
+
+        evertexPoints[FaceLandmark.headCenter * 2] = vertexPoints[FaceLandmark.eyeCenter * 2] * 3.0f - vertexPoints[FaceLandmark.noseTop * 2]*2.0f;
+        evertexPoints[FaceLandmark.headCenter * 2 + 1] = vertexPoints[FaceLandmark.eyeCenter * 2 + 1] * 3.0f - vertexPoints[FaceLandmark.noseTop * 2 + 1]*2.0f;
+
+        // 额头左侧，备注：这个点不太准确，后续优化
+
+        FacePointsUtils.getCenter(point,
+                evertexPoints[FaceLandmark.leftEyebrowLeftTopCorner * 2],
+                evertexPoints[FaceLandmark.leftEyebrowLeftTopCorner * 2 + 1],
+                evertexPoints[FaceLandmark.headCenter * 2],
+                evertexPoints[FaceLandmark.headCenter * 2 + 1]
+        );
+        evertexPoints[FaceLandmark.leftHead * 2] = point[0];
+        evertexPoints[FaceLandmark.leftHead * 2 + 1] = evertexPoints[FaceLandmark.headCenter * 2 + 1];
+
+        // 额头右侧，备注：这个点不太准确，后续优化
+
+        FacePointsUtils.getCenter(point,
+                evertexPoints[FaceLandmark.rightEyebrowRightTopCorner * 2],
+                evertexPoints[FaceLandmark.rightEyebrowRightTopCorner * 2 + 1],
+                evertexPoints[FaceLandmark.headCenter * 2],
+                evertexPoints[FaceLandmark.headCenter * 2 + 1]
+        );
+        evertexPoints[FaceLandmark.rightHead * 2] = point[0];
+        evertexPoints[FaceLandmark.rightHead * 2 + 1] = evertexPoints[FaceLandmark.headCenter * 2 + 1];
+        return evertexPoints;
     }
 }

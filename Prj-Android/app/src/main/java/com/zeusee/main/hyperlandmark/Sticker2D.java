@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.zeusee.main.hyperlandmark.jni.Face;
+import com.zeusee.main.hyperlandmark.jni.FaceTracking;
 
 import org.json.JSONException;
 
@@ -64,8 +65,9 @@ public class Sticker2D {
     private float mRatio;
     private float[] mStickerVertices = new float[8];
 
+    private String stickerName;
     private Context context;
-    public Sticker2D(Context context, String folderPath){
+    public Sticker2D(Context context){
         this.context = context;
         vertexBuffer = ByteBuffer.allocateDirect(vertexData.length * 4)
                 .order(ByteOrder.nativeOrder())
@@ -78,31 +80,9 @@ public class Sticker2D {
                 .asFloatBuffer()
                 .put(textureVertexData);
         textureVertexBuffer.position(0);
-
-        try{
-            mStickerList = ResourceDecoder.decodeStickerData(this.context, folderPath+"/json");
-            if(mStickerList ==  null){
-                Log.e("debug", "mStickerList is null");
-            }
-        } catch (IOException | JSONException e){
-            Log.e(TAG, "IOException or JSONException: ", e);
-        }
-        mStickerLoaderList = new ArrayList<>();
-        if(mStickerList != null){
-            Log.e("debug", "mStickerList is not null");
-            for(int i=0;i<mStickerList.size();i++){
-                if(mStickerList.get(i) instanceof FaceStickerJson) {
-                    String path = folderPath + "/" + mStickerList.get(i).stickerName;
-                    System.out.println("\t\t"+path);
-                    mStickerLoaderList.add(new FaceStickerLoader(mStickerList.get(i), path));
-                }
-            }
-        }
         initMatrix();
         vertexShader = ShaderUtils.getShaderFromAssets(context, "shader/vertex_sticker.glsl");
         fragmentShader = ShaderUtils.getShaderFromAssets(context, "shader/fragment_sticker.glsl");
-        Log.e("debug: ", "vertexShader:\n"+vertexShader);
-        Log.e("debug:", "fragmentShader:\n"+fragmentShader);
     }
 
     private int width;
@@ -134,13 +114,19 @@ public class Sticker2D {
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER,0); // 操作完成之后解绑FBO
     }
 
-    public void drawFrame(){
+    public int drawFrame(){
+        if(faces == null){
+            return 0;
+        }
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBuffers[0]);
         GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT); // 清除预设值的缓冲区;
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
         float[] points;
-        for(Face r: faces){
+        float[] epoints;
+        for(int k=0;k<faces.size();k++){
+            Face r = faces.get(k);
             points = new float[106*2];
+            epoints = new float[109*2];
             for (int i = 0; i < 106; i++) {
                 int x;
                 if (rotate270) {
@@ -149,15 +135,17 @@ public class Sticker2D {
                     x = CameraOverlap.PREVIEW_HEIGHT - r.landmarks[i * 2];
                 }
                 int y = r.landmarks[i * 2 + 1] * CameraOverlap.SCALLE_FACTOR;
-                points[i * 2] = view2openglX(x, CameraOverlap.PREVIEW_HEIGHT);
-                points[i * 2 + 1] = view2openglY(y, CameraOverlap.PREVIEW_WIDTH);
+                points[i * 2] = view2openglX(x, CameraProxy.mPreviewHeight);
+                points[i * 2 + 1] = view2openglY(y, CameraProxy.mPreviewWidth);
             }
+            epoints = FaceTracking.getInstance().calculateExtraFacePoints(points);
             for(int i =0;i<mStickerLoaderList.size();i++){
-                mStickerLoaderList.get(i).updateStickerTexture(this.context);
-                calculateVertex(mStickerLoaderList.get(i).getStickerData(), points, r);
+                mStickerLoaderList.get(i).updateStickerTexture();
+                calculateVertex(mStickerLoaderList.get(i).getStickerData(), epoints, r);
                 drawFrameBuffer(mStickerLoaderList.get(i).getStickerTexture());
             }
         }
+        return textures[0];
     }
 
     public void drawFrameBuffer(int textureId){
@@ -173,7 +161,7 @@ public class Sticker2D {
 
         GLES20.glEnableVertexAttribArray(aTextureCoordHandle);
         GLES20.glVertexAttribPointer(aTextureCoordHandle,2,GLES20.GL_FLOAT,false,8,textureVertexBuffer);
-        GLES20.glUniformMatrix4fv(vPMatrixHandle, 1, false, mMVPMatrix, 0);
+        GLES20.glUniformMatrix4fv(vPMatrixHandle, 1, false, mModelMatrix, 0);
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0); // 选择活动纹理单元
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId); // 绑定纹理
         GLES20.glUniform1i(uTextureSamplerHandle,0); // 对应纹理第一层
@@ -203,7 +191,8 @@ public class Sticker2D {
                 points[stickerData.startIndex*2+1],
                 points[stickerData.endIndex*2],
                 points[stickerData.endIndex*2+1]
-        );
+        )/2;
+        stickerWidth = stickerWidth*stickerData.baseScale;
         float ndcStickerWidth = stickerWidth * PROJECTION_SCALE;
         float ndcStickerHeight = ndcStickerWidth * (float) stickerData.height / (float) stickerData.width;
 
@@ -227,7 +216,7 @@ public class Sticker2D {
         setPoints(mStickerVertices);
 
         Matrix.setIdentityM(mModelMatrix, 0);
-        Matrix.translateM(mModelMatrix, 0, centerX, centerY, 0);
+        Matrix.translateM(mModelMatrix, 0, anchorX, anchorY, 0);
 
         float pitchAngle = -face.pitch;
         float yawAngle = face.yaw;
@@ -239,16 +228,16 @@ public class Sticker2D {
             pitchAngle = (pitchAngle / Math.abs(pitchAngle)) * 90;
         }
 
-        Log.e("debug:", "rollAngle: "+rollAngle+"\tyawAngle: "+yawAngle+"\tpitchAngle: "+pitchAngle);
+        Log.e("debug", "rollAngle: "+rollAngle+"\tyawAngle: "+yawAngle+"\tpitchAngle: "+pitchAngle);
         Matrix.rotateM(mModelMatrix, 0, rollAngle, 0, 0, 1);
         Matrix.rotateM(mModelMatrix, 0, yawAngle, 0, 1, 0);
         Matrix.rotateM(mModelMatrix, 0, pitchAngle, 1, 0, 0);
 
-        Matrix.translateM(mModelMatrix, 0, -centerX, -centerY, 0);
+        Matrix.translateM(mModelMatrix, 0, -anchorX, -anchorY, 0);
 
-        Matrix.setIdentityM(mMVPMatrix, 0);
-        Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
-        Matrix.multiplyMM(mMVPMatrix, 0, mMVPMatrix, 0, mModelMatrix, 0);
+//        Matrix.setIdentityM(mMVPMatrix, 0);
+//        Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
+//        Matrix.multiplyMM(mMVPMatrix, 0, mMVPMatrix, 0, mModelMatrix, 0);
     }
 
     public void initMatrix(){
@@ -292,7 +281,7 @@ public class Sticker2D {
         this.rotate270 = rotate270;
         mRatio = (float) width / height;
         Matrix.frustumM(mProjectionMatrix, 0, -mRatio, mRatio, -1.0f, 1.0f, 3.0f, 9.0f);
-        Matrix.setLookAtM(mViewMatrix, 0, 0, 0, 6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        Matrix.setLookAtM(mViewMatrix, 0, 0, 0, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
     }
 
     private float view2openglX(int x, int width) {
@@ -306,4 +295,33 @@ public class Sticker2D {
         float s = centerY - y;
         return s / centerY;
     }
+
+    public void setStickerName(String stickerName){
+        this.stickerName = stickerName;
+        loadSticker();
+    }
+
+    private void loadSticker(){
+        String folderPath = "stickers/"+stickerName;
+        try{
+            mStickerList = ResourceDecoder.decodeStickerData(this.context, folderPath+"/json");
+            if(mStickerList ==  null){
+                Log.e("debug", "mStickerList is null");
+            }
+        } catch (IOException | JSONException e){
+            Log.e(TAG, "IOException or JSONException: ", e);
+        }
+        mStickerLoaderList = new ArrayList<>();
+        if(mStickerList != null){
+            Log.e("debug", "mStickerList is not null");
+            for(int i=0;i<mStickerList.size();i++){
+                if(mStickerList.get(i) instanceof FaceStickerJson) {
+                    String path = folderPath + "/" + mStickerList.get(i).stickerName;
+                    System.out.println("\t\t"+path);
+                    mStickerLoaderList.add(new FaceStickerLoader(mStickerList.get(i), path, context));
+                }
+            }
+        }
+    }
+
 }

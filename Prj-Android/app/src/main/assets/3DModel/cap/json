@@ -1,0 +1,23 @@
+{
+  "stickerList": [{
+    "type": "sticker3D",
+    "readType": "readMultiObj",
+    "centerIndexList": [21],
+    "offsetX": 0.0,
+    "offsetY": 0.0,
+    "baseScale": 2,
+    "startIndex": 7,
+    "endIndex": 17,
+    "width": 27.4316,
+    "height": 34.329123,
+    "deep": 31.387562,
+    "frames": 0,
+    "action": 0,
+    "stickerName": "objCap",
+    "duration": 100,
+    "stickerLooping": 1,
+    "audioPath": "",
+    "audioLooping": 0,
+    "maxcount": 0
+  }]
+}

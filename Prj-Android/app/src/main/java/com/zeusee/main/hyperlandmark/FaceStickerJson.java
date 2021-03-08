@@ -18,11 +18,13 @@ public class FaceStickerJson {
     public float baseScale;         // 贴纸基准缩放倍数
     public int startIndex;          // 人脸起始索引
     public int endIndex;            // 人脸结束索引， 用于计算人脸宽度
-    public int width;               // 贴纸宽度
-    public int height;              // 贴纸高度
+    public double width;               // 贴纸宽度
+    public double height;              // 贴纸高度
+    public double deep;             // 3D模型的深度
     public int frames;              // 贴纸帧数
     public int action;              // 动作， 0表示默认显示，这里用来处理贴纸动作等
     public String stickerName;      // 贴纸名称， 用于标记贴纸所在文件夹以及png文件的
+    public String readType;
     public int duration;            // 贴纸帧显示间隔
     public boolean stickerLooping;  //贴纸是否循环渲染
     public int maxCount;            // 最大贴纸渲染次数
@@ -39,6 +41,7 @@ public class FaceStickerJson {
                 "endIndex = " + endIndex +
                 "width = " + width +
                 "height = " + height +
+                "deep = " + deep +
                 ", frames=" + frames +
                 ", action=" + action +
                 ", stickerName='" + stickerName + '\'' +

@@ -107,11 +107,13 @@ public class ResourceDecoder {
             data.baseScale = (float) jsonData.getDouble("baseScale");
             data.startIndex = jsonData.getInt("startIndex");
             data.endIndex = jsonData.getInt("endIndex");
-            data.width = jsonData.getInt("width");
-            data.height = jsonData.getInt("height");
+            data.width = jsonData.getDouble("width");
+            data.height = jsonData.getDouble("height");
+            data.deep = jsonData.getDouble("deep");
             data.frames = jsonData.getInt("frames");
             data.action = jsonData.getInt("action");
             data.stickerName = jsonData.getString("stickerName");
+            data.readType = jsonData.getString("readType");
             data.duration = jsonData.getInt("duration");
             data.stickerLooping = (jsonData.getInt("stickerLooping") == 1);
             data.maxCount = jsonData.optInt("maxCount", 5);

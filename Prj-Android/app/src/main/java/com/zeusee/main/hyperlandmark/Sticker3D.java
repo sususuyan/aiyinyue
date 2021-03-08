@@ -1,322 +1,252 @@
 package com.zeusee.main.hyperlandmark;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
+import android.opengl.GLUtils;
 import android.opengl.Matrix;
 import android.util.Log;
 
-import com.zeusee.main.hyperlandmark.jni.Face;
+import org.json.JSONException;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.microedition.khronos.opengles.GL;
-
 /**
- * @ClassName Stacker3D
+ * @ClassName sticker3D
  * @Description TODO
  * @Author : kevin
- * @Date 2021/02/03 9:38
+ * @Date 2021/03/06 20:16
  * @Version 1.0
  */
 public class Sticker3D {
-    private List<Face> faces;
-    private FloatBuffer vertexBuffer,colorBuffer;
-    private ShortBuffer indexBuffer;
-    private final String vertexShaderCode =
-            "attribute vec4 vPosition;" +
-                    "uniform mat4 vMatrix;"+
-                    "varying  vec4 vColor;"+
-                    "attribute vec4 aColor;"+
-                    "void main() {" +
-                    "  gl_Position = vMatrix*vPosition;" +
-                    "  vColor=aColor;"+
-                    "}";
+    private String stickerName;
+    private List<Obj3D> objs;
+    private List<FaceStickerJson> stickerJsonList;
+    private int[] textures;
 
-    private final String fragmentShaderCode =
-            "precision mediump float;" +
-                    "varying vec4 vColor;" +
-                    "void main() {" +
-                    "  gl_FragColor = vColor;" +
-                    "}";
+    private String vertexShaderCode;
+    private String fragmentShaderCode;
 
-    final int COORDS_PER_VERTEX = 3;
-    final float cubePositions[] = {
-            -1.0f,1.0f,1.0f,    //正面左上0
-            -1.0f,-1.0f,1.0f,   //正面左下1
-            1.0f,-1.0f,1.0f,    //正面右下2
-            1.0f,1.0f,1.0f,     //正面右上3
-            -1.0f,1.0f,-1.0f,    //反面左上4
-            -1.0f,-1.0f,-1.0f,   //反面左下5
-            1.0f,-1.0f,-1.0f,    //反面右下6
-            1.0f,1.0f,-1.0f,     //反面右上7
-    };
-    final short index[]={
-            6,7,4,6,4,5,    //后面
-            6,3,7,6,2,3,    //右面
-            6,5,1,6,1,2,    //下面
-            0,3,2,0,2,1,    //正面
-            0,1,5,0,5,4,    //左面
-            0,7,3,0,4,7,    //上面
-    };
-
-    float color[] = {
-            0f,1f,0f,1f,
-            0f,1f,0f,1f,
-            0f,1f,0f,1f,
-            0f,1f,0f,1f,
-            1f,0f,0f,1f,
-            1f,0f,0f,1f,
-            1f,0f,0f,1f,
-            1f,0f,0f,1f,
-    };
-
-    private int mProgram;
-    private int mPositionHandle;
-    private int mColorHandle;
-
-    private float[] mViewMatrix=new float[16];
-    private float[] mProjectMatrix=new float[16];
-    private float[] mMVPMatrix=new float[16];
-
-    private int textureId;
-    private int frameBufferId;
-    private int renderBufferId;
-
-    private int mMatrixHandler;
-    //顶点个数
-    private final int vertexCount = cubePositions.length / COORDS_PER_VERTEX;
-    //顶点之间的偏移量
-    private final int vertexStride = COORDS_PER_VERTEX * 4; // 每个顶点四个字节
-
-    public Sticker3D(){
-        vertexBuffer = ByteBuffer.allocateDirect(cubePositions.length*4)
-                .order(ByteOrder.nativeOrder())
-                .asFloatBuffer()
-                .put(cubePositions);
-        vertexBuffer.position(0);
-
-        colorBuffer = ByteBuffer.allocateDirect(color.length*4)
-                .order(ByteOrder.nativeOrder())
-                .asFloatBuffer()
-                .put(color);
-        colorBuffer.position(0);
-
-        indexBuffer = ByteBuffer.allocateDirect(index.length*2)
-                .order(ByteOrder.nativeOrder())
-                .asShortBuffer()
-                .put(index);
-        indexBuffer.position(0);
-
-        mProgram = ShaderUtils.createProgram(vertexShaderCode, fragmentShaderCode);
-        initMatrix();
-    }
-
-    public void initMatrix(){
-        Matrix.setIdentityM(mProjectMatrix, 0);
-        Matrix.setIdentityM(mViewMatrix, 0);
-        Matrix.setIdentityM(mMVPMatrix, 0);
-    }
+    private int programId;
+    private int mHPosition;
+    private int mHNormal;
+    private int mHMatrix;
+    private int mHCoord;
+    private int mHTexture;
+    private int mHKa;
+    private int mHKd;
+    private int mHKs;
+    private Context context;
 
     private int width;
     private int height;
     private boolean rotate270;
+
+    private int[] fboTextureId;
+    private int[] frameBufferId;
+    private int[] renderBufferId;
+
+    private float[] mModelMatrix = new float[16];
+
+    private FloatBuffer mVerBuffer;
+    private FloatBuffer mTexBuffer;
+    private int textureType=0;
+    private int textureId=0;
+
+    //顶点坐标
+    private float pos[] = {
+            -1.0f,  1.0f,
+            -1.0f, -1.0f,
+            1.0f, 1.0f,
+            1.0f,  -1.0f,
+    };
+
+    //纹理坐标
+    private float[] coord={
+            0.0f, 0.0f,
+            0.0f,  1.0f,
+            1.0f,  0.0f,
+            1.0f, 1.0f,
+    };
+
+    public Sticker3D(Context context){
+        this.context = context;
+        initBuffer();
+
+    }
+
+    public void initBuffer(){
+        ByteBuffer a=ByteBuffer.allocateDirect(32);
+        a.order(ByteOrder.nativeOrder());
+        mVerBuffer=a.asFloatBuffer();
+        mVerBuffer.put(pos);
+        mVerBuffer.position(0);
+        ByteBuffer b=ByteBuffer.allocateDirect(32);
+        b.order(ByteOrder.nativeOrder());
+        mTexBuffer=b.asFloatBuffer();
+        mTexBuffer.put(coord);
+        mTexBuffer.position(0);
+    }
+
+    public void onCreate(){
+        vertexShaderCode = ShaderUtils.getShaderFromAssets(context, "shader/vertex_obj.glsl");
+        fragmentShaderCode = ShaderUtils.getShaderFromAssets(context, "shader/fragment_obj.glsl");
+
+        programId = ShaderUtils.createProgram(vertexShaderCode, fragmentShaderCode);
+        mHPosition = GLES20.glGetAttribLocation(programId, "vPosition");
+        mHNormal = GLES20.glGetAttribLocation(programId, "vNormal");
+        mHMatrix=GLES20.glGetUniformLocation(programId,"vMatrix");
+        mHCoord=GLES20.glGetAttribLocation(programId,"vCoord");
+        mHTexture=GLES20.glGetUniformLocation(programId,"vTexture");
+        mHKa=GLES20.glGetUniformLocation(programId,"vKa");
+        mHKd=GLES20.glGetUniformLocation(programId,"vKd");
+        mHKs=GLES20.glGetUniformLocation(programId,"vKs");
+
+    }
+
     public void initFrame(){
-        int[] textures = new int[1];
-        GLES20.glGenTextures(1, textures, 0);
-        textureId = textures[0];
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
-        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_NEAREST);
-        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR);
-        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_MIRRORED_REPEAT);
-        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_MIRRORED_REPEAT);
-        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, width, height,
-                0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null);
-
-        int[] renderBuffers = new int[1];
-        GLES20.glGenRenderbuffers(1, renderBuffers, 0);
-        renderBufferId = renderBuffers[0];
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER, renderBufferId);
-        GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16,width, height);
-
-        int[] frameBuffers = new int[1];
-        GLES20.glGenFramebuffers(1, frameBuffers, 0);
-        frameBufferId = frameBuffers[0];
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBufferId);
-        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0, GLES20.GL_TEXTURE_2D, textureId, 0);
-        GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT, GLES20.GL_RENDERBUFFER, renderBufferId);
-        if(GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER) != GLES20.GL_FRAMEBUFFER_COMPLETE) {
-            Log.i("fbo", "Framebuffer error");
-        }
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
-        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER, 0); // 解绑renderBuffer
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
-
-        mPositionHandle = GLES20.glGetAttribLocation(mProgram, "vPosition");
-        mColorHandle = GLES20.glGetAttribLocation(mProgram, "aColor");
-        mMatrixHandler= GLES20.glGetUniformLocation(mProgram,"vMatrix");
-
+//        fboTextureId = new int[1];
+//        GLES20.glGenTextures(1, fboTextureId, 0);
+//        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, fboTextureId[0]);
+//        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_NEAREST);
+//        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR);
+//        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_MIRRORED_REPEAT);
+//        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_MIRRORED_REPEAT);
+//        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, width, height,
+//                0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null);
+//
+//        renderBufferId = new int[1];
+//        GLES20.glGenRenderbuffers(1, renderBufferId, 0);
+//        GLES20.glBindRenderbuffer(GLES20.GL_RENDERBUFFER, renderBufferId[0]);
+//        GLES20.glRenderbufferStorage(GLES20.GL_RENDERBUFFER, GLES20.GL_DEPTH_COMPONENT16,width, height);
+//
+//        frameBufferId = new int[1];
+//        GLES20.glGenFramebuffers(1, frameBufferId, 0);
+//        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBufferId[0]);
+//        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0, GLES20.GL_TEXTURE_2D, fboTextureId[0], 0);
+//        GLES20.glFramebufferRenderbuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_DEPTH_ATTACHMENT, GLES20.GL_RENDERBUFFER, renderBufferId[0]);
+//        if(GLES20.glCheckFramebufferStatus(GLES20.GL_FRAMEBUFFER) != GLES20.GL_FRAMEBUFFER_COMPLETE) {
+//            Log.i("fbo", "Framebuffer error");
+//        }
     }
 
     public void drawFrame(){
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBufferId);
-        GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
-        float[] points;
-        for(Face r : faces){
-            points = new float[106 * 2];
-            for (int i = 0; i < 106; i++) {
-                int x;
-                if (rotate270) {
-                    x = r.landmarks[i * 2] * CameraOverlap.SCALLE_FACTOR;
-                } else {
-                    x = CameraOverlap.PREVIEW_HEIGHT - r.landmarks[i * 2];
-                }
-                int y = r.landmarks[i * 2 + 1] * CameraOverlap.SCALLE_FACTOR;
-                points[i * 2] = view2openglX(x, CameraOverlap.PREVIEW_HEIGHT);
-                points[i * 2 + 1] = view2openglY(y, CameraOverlap.PREVIEW_WIDTH);
-            }
-            calculateVertex(r, points);
-            draw();
+//        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBufferId[0]);
+//        GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
+//        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+        for(int i=0;i<objs.size();i++){
+            Obj3D obj = objs.get(i);
+            calculateVertex();
+            draw(obj, textures[i], i);
         }
+//        return fboTextureId[0];
     }
 
-    private void draw(){
+    public void draw(Obj3D obj, int tid, int textureType){
+//        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBufferId[0]);
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBufferId);
-        GLES20.glUseProgram(mProgram);
-        GLES20.glEnableVertexAttribArray(mPositionHandle);
-        GLES20.glVertexAttribPointer(mPositionHandle, 3, GLES20.GL_FLOAT, false, 0, vertexBuffer);
-        GLES20.glEnableVertexAttribArray(mColorHandle);
-        GLES20.glVertexAttribPointer(mColorHandle, 4, GLES20.GL_FLOAT, false, 0, colorBuffer);
-        GLES20.glUniformMatrix4fv(mMatrixHandler, 1, false, mMVPMatrix, 0);
-        GLES20.glDrawElements(GLES20.GL_TRIANGLES,index.length, GLES20.GL_UNSIGNED_SHORT,indexBuffer);
-        GLES20.glDisableVertexAttribArray(mPositionHandle);
-        GLES20.glDisableVertexAttribArray(mColorHandle);
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+
+        GLES20.glUseProgram(programId);
+        GLES20.glEnableVertexAttribArray(mHPosition);
+        GLES20.glVertexAttribPointer(mHPosition,3, GLES20.GL_FLOAT, false, 3*4,obj.vert);
+        GLES20.glEnableVertexAttribArray(mHNormal);
+        GLES20.glVertexAttribPointer(mHNormal,3, GLES20.GL_FLOAT, false, 3*4,obj.vertNorl);
+        GLES20.glEnableVertexAttribArray(mHCoord);
+        GLES20.glVertexAttribPointer(mHCoord,2,GLES20.GL_FLOAT,false,0,obj.vertTexture);
+        GLES20.glUniformMatrix4fv(mHMatrix,1,false, mModelMatrix,0);
+        if(obj!=null&&obj.mtl!=null){
+            GLES20.glUniform3fv(mHKa,1,obj.mtl.Ka,0);
+            GLES20.glUniform3fv(mHKd,1,obj.mtl.Kd,0);
+            GLES20.glUniform3fv(mHKs,1,obj.mtl.Ks,0);
+        }
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0+textureType);
+        GLES20.glBindBuffer(GLES20.GL_TEXTURE_2D, tid);
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLES,0,obj.vertCount);
+        GLES20.glDisableVertexAttribArray(mHPosition);
+        GLES20.glDisableVertexAttribArray(mHNormal);
+        GLES20.glDisableVertexAttribArray(mHCoord);
+        GLES20.glDisable(GLES20.GL_DEPTH_TEST);
     }
 
-    public void calculateVertex(Face face, float[] points){
-        float centerX = points[23*2];
-        float centerY = points[23*2+1];
-        float centerZ = 0.0f;
-        float faceWidth = (float) getDistance(
-                points[7*2],
-                points[7*2+1],
-                points[17*2],
-                points[17*2+1]
-        )/2;
-        float faceHeight = (float) getDistance(
-                points[23*2],
-                points[23*2+1],
-                points[0*2],
-                points[0*2+1]
-        );
-        float leftX = points[7*2];
-        float rightX = points[17*2];
-        float bottomY = points[0*2+1];
-        float topY = centerY + faceHeight;
-        float faceDeep = faceWidth*2;
-        Log.e("debug", "centerX: "+centerX+"  centerY: "+centerY+"   centerZ: "+centerZ);
-        Log.e("debug", "faceWidth: "+faceWidth+"   faceHeight: "+faceHeight+"   faceDeep: "+faceDeep);
-        float[] vertices = new float[24];
-        vertices[0] = leftX;
-        vertices[1] = topY;
-        vertices[2] = centerZ;
-
-        vertices[3] = leftX;
-        vertices[4] = bottomY;
-        vertices[5] = centerZ;
-
-        vertices[6] = rightX;
-        vertices[7] = bottomY;
-        vertices[8] = centerZ ;
-
-        vertices[9] = rightX;
-        vertices[10] = topY;
-        vertices[11] = centerZ;
-
-        vertices[12] = leftX;
-        vertices[13] = topY;
-        vertices[14] = centerZ - faceDeep;
-
-        vertices[15] = leftX;
-        vertices[16] = bottomY;
-        vertices[17] = centerZ - faceDeep;
-
-        vertices[18] = rightX;
-        vertices[19] = bottomY;
-        vertices[20] = centerZ - faceDeep;
-
-        vertices[21] = rightX;
-        vertices[22] = topY;
-        vertices[23] = centerZ - faceDeep;
-
-        setPoints(vertices);
-
-        float[] mModelMatrix = new float[16];
+    public void calculateVertex(){
         Matrix.setIdentityM(mModelMatrix, 0);
-        Matrix.translateM(mModelMatrix, 0, centerX, centerY, centerZ);
-
-        float pitchAngle = -face.pitch;
-        float yawAngle = face.yaw;
-        float rollAngle = -face.roll;
-        if(Math.abs(yawAngle)>90){
-            yawAngle = (yawAngle/Math.abs(yawAngle))*90;
-        }
-        if(Math.abs(pitchAngle)>90){
-            pitchAngle = (pitchAngle / Math.abs(pitchAngle)) * 90;
-        }
-
-        Log.e("debug:", "rollAngle: "+rollAngle+"\tyawAngle: "+yawAngle+"\tpitchAngle: "+pitchAngle);
-        Matrix.rotateM(mModelMatrix, 0, rollAngle, 0, 0, 1);
-        Matrix.rotateM(mModelMatrix, 0, yawAngle, 0, 1, 0);
-        Matrix.rotateM(mModelMatrix, 0, pitchAngle, 1, 0, 0);
-
-        Matrix.translateM(mModelMatrix, 0, -centerX, -centerY, 0);
-
-        Matrix.setIdentityM(mMVPMatrix, 0);
-        Matrix.multiplyMM(mMVPMatrix, 0, mProjectMatrix, 0, mViewMatrix, 0);
-        Matrix.multiplyMM(mMVPMatrix, 0, mMVPMatrix, 0, mModelMatrix, 0);
+        Matrix.scaleM(mModelMatrix, 0,0.1f, 0.1f*width/height, 0.1f);
     }
 
-    public void inputSizeChanged(int width, int height, boolean rotate270){
+    public void release(){
+        GLES20.glDeleteProgram(programId);
+        GLES20.glDeleteTextures(1, fboTextureId, 0);
+        GLES20.glDeleteRenderbuffers(1, renderBufferId, 0);
+        GLES20.glDeleteFramebuffers(1, frameBufferId, 0);
+    }
+
+    public void sizeChange(int width, int height, boolean rotate270){
+        GLES20.glViewport(0,0,width,height);
         this.width = width;
         this.height = height;
         this.rotate270 = rotate270;
-        float Ratio = (float) width / height;
-        Matrix.frustumM(mProjectMatrix, 0, -Ratio, Ratio, -1.0f, 1.0f, 3.0f, 9.0f);
-        Matrix.setLookAtM(mViewMatrix, 0, 0, 0, 6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+    }
+    public void loadSticker(){
+        String folderPath = "3DModel/"+stickerName;
+        try{
+            stickerJsonList = ResourceDecoder.decodeStickerData(context, folderPath+"/json");
+            if(stickerJsonList == null){
+                Log.e("Sticker3D", "tickerJsonList is null");
+                return;
+            }
+        }catch (IOException | JSONException e){
+            Log.e("Sticker3D", "IOException or JSONException", e);
+        }
+        String folderPath1 = "assets/"+folderPath;
+        objs = ObjReader.readMultiObj(context, folderPath1+"/"+stickerJsonList.get(0).stickerName+".obj");
+        textures = new int[objs.size()];
+        Log.e("debug", "objs.size()"+objs.size());
+        for(int i=0;i<objs.size();i++){
+            if(objs.get(i).vertTexture == null || objs.get(i).mtl.map_Kd == null){
+                textures[i]=0;
+            }
+            else {
+                try{
+                    Log.e("debug", "map_kd: "+ folderPath+"/"+objs.get(i).mtl.map_Kd);
+                    Bitmap bitmap = BitmapFactory.decodeStream(context.getAssets().open(folderPath+"/"+objs.get(i).mtl.map_Kd));
+                    textures[i] = createTexture(bitmap);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
-    public void setPoints(float[] points){
-        vertexBuffer.rewind();
-        vertexBuffer.put(points);
-        vertexBuffer.position(0);
+    public void setStickerName(String name) {
+        stickerName = name;
+        loadSticker();
     }
 
-    public int getTextureId(){
-        return textureId;
-    }
-
-    public void setFaces(List<Face> faces){
-        this.faces = faces;
-    }
-
-    private float view2openglX(int x, int width) {
-        float centerX = width / 2.0f;
-        float t = x - centerX;
-        return t / centerX;
-    }
-
-    private float view2openglY(int y, int height) {
-        float centerY = height / 2.0f;
-        float s = centerY - y;
-        return s / centerY;
-    }
-
-    private double getDistance(float x1, float y1, float x2, float y2){
-        return Math.sqrt(Math.pow(x1-x2, 2) + Math.pow(y1-y2, 2));
+    private int createTexture(Bitmap bitmap){
+        int[] texture=new int[1];
+        if(bitmap!=null&&!bitmap.isRecycled()){
+            //生成纹理
+            GLES20.glGenTextures(1,texture,0);
+            //生成纹理
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D,texture[0]);
+            //设置缩小过滤为使用纹理中坐标最接近的一个像素的颜色作为需要绘制的像素颜色
+            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,GLES20.GL_NEAREST);
+            //设置放大过滤为使用纹理中坐标最接近的若干个颜色，通过加权平均算法得到需要绘制的像素颜色
+            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,GLES20.GL_TEXTURE_MAG_FILTER,GLES20.GL_LINEAR);
+            //设置环绕方向S，截取纹理坐标到[1/2n,1-1/2n]。将导致永远不会与border融合
+            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,GLES20.GL_CLAMP_TO_EDGE);
+            //设置环绕方向T，截取纹理坐标到[1/2n,1-1/2n]。将导致永远不会与border融合
+            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,GLES20.GL_CLAMP_TO_EDGE);
+            //根据以上指定的参数，生成一个2D纹理
+            GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
+            return texture[0];
+        }
+        return 0;
     }
 }

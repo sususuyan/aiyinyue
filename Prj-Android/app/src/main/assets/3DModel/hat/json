@@ -1,0 +1,23 @@
+{
+  "stickerList": [{
+    "type": "sticker3D",
+    "readType": "read",
+    "centerIndexList": [21],
+    "offsetX": 0.0,
+    "offsetY": 0.0,
+    "baseScale": 2,
+    "startIndex": 7,
+    "endIndex": 17,
+    "width": 8.5355192,
+    "height": 4.13851817,
+    "deep": 9.41140358,
+    "frames": 0,
+    "action": 0,
+    "stickerName": "hat",
+    "duration": 100,
+    "stickerLooping": 1,
+    "audioPath": "",
+    "audioLooping": 0,
+    "maxcount": 0
+  }]
+}

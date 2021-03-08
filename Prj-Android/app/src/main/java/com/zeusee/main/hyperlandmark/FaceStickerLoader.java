@@ -10,6 +10,7 @@ import android.util.Pair;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -32,8 +33,11 @@ public class FaceStickerLoader {
     private ResourceDecoder resourceDecoder;
     private int mFrameIndex = -1;
     private long mCurrentTime = -1L;
+    private Context mContext;
+    private ArrayList<Bitmap> bitmaps;
 
-    public FaceStickerLoader(FaceStickerJson stickerJson, String folderPath){
+    public FaceStickerLoader(FaceStickerJson stickerJson, String folderPath, Context context){
+        mContext = context;
         mFolderPath = folderPath.startsWith("file://")? folderPath.substring("file://".length()) : folderPath;
         mStickerData = stickerJson;
         Pair pair = ResourceDecoder.getResourceFile(mFolderPath);
@@ -50,9 +54,11 @@ public class FaceStickerLoader {
         }
         mStickerTexture = -1;
         mRestoreTexture = -1;
+        bitmaps = new ArrayList<>();
+        loadBitmap();
     }
 
-    public void updateStickerTexture(Context context){
+    public void updateStickerTexture(){
         if (mCurrentTime == -1L) {
             mCurrentTime = System.currentTimeMillis();
         }
@@ -75,16 +81,12 @@ public class FaceStickerLoader {
             return;
         }
         Bitmap bitmap = null;
-        String path = String.format(Locale.ENGLISH, mStickerData.stickerName+"_%03d.png", new Object[] {frameIndex});
-        try{
-            InputStream bit = context.getAssets().open(mFolderPath+"/"+path);
-            bitmap = BitmapFactory.decodeStream(bit);
-        } catch (IOException e){
-            Log.d(TAG, "IOException: ");
+        Log.e("debug", "frameIndex: "+frameIndex);
+        if(frameIndex>=bitmaps.size()){
+            frameIndex = 0;
         }
-
+        bitmap = bitmaps.get(frameIndex);
         if (bitmap != null) {
-            Log.e("debug", "bitmap load success");
             if (mStickerTexture == -1 && mRestoreTexture != -1){
                 mStickerTexture = mRestoreTexture;
             }
@@ -152,5 +154,23 @@ public class FaceStickerLoader {
         GLES20.glDeleteTextures(1, textures, 0);
         mStickerTexture = -1;
         mRestoreTexture = -1;
+    }
+
+    private void loadBitmap(){
+        int length = mStickerData.frames;
+        for(int i=0;i<length;i++){
+            String path = String.format(Locale.ENGLISH, mStickerData.stickerName+"_%03d.png", new Object[] {i});
+            Bitmap bitmap = null;
+            Log.e(TAG, "path: "+mFolderPath+"/"+path);
+            try{
+                InputStream bit = mContext.getAssets().open(mFolderPath+"/"+path);
+                bitmap = BitmapFactory.decodeStream(bit);
+            }catch (IOException e){
+                Log.d(TAG, "IOException: ");
+            }
+            if(bitmap !=null){
+                bitmaps.add(bitmap);
+            }
+        }
     }
 }
